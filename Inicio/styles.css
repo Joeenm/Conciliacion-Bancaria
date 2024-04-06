@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif;
+  background-image: url('fondo.jpeg');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: top;
+}
+
+a {
+  text-decoration: none;
+}
+
+#reloj {
+  font-size: 1.5rem;
+  font-weight: 1000;
+  padding: 15px 20px;
+  border-radius: 15px;
+  border: 5px solid rgb(255, 255, 255);
+  color: aqua;
+}
+
+.navbar {
+  height: 90px;
+  background-color: hsl(0, 0%, 10%);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo i {
+  color: #0aa5ff;
+  font-size: 24px;
+}
+
+.navbar .logo a {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-left: 12px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.menu-links {
+  display: flex;
+  gap: 24px;
+  border-right: 1px solid #999999;
+  padding-inline: 24px;
+}
+
+.menu-links a {
+  font-weight: 500;
+  color: #999999;
+  padding: 8px 16px;
+}
+.menu-links a:hover {
+  color: white;
+}
+
+.menu-btn {
+  font-size: 32px;
+  color: white;
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 53rem) {
+  .menu {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}
+
+
+.Caja-D { /*es el div que contiene la etiqueta <a> Operaciones Cks, posciciona las letras para simularse a los demás <a>  */
+  position: relative;
+  display: flex; /* Habilitar flexbox */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+}
+
+.OP-Caja { /*el div desplegable */
+  position: absolute;
+  top: 40%; /*la distancia del desplegado, recomendable no cambiar */
+  list-style-type: none; /*evita que la lista se vea como tal */
+  left: 0;
+  display: flex;
+  background-color: rgb(77, 76, 76); /* Cambia esto al color de fondo deseado */
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  width: 126%; 
+
+}
+
+.Caja-D:hover .OP-Caja, /*Evita que el desplegable desaparesca */
+.OP-Caja:hover {
+  display: block;
+}
+
+.OP-Caja li {
+  margin-bottom: 4px; /* Espaciado entre elementos de la lista */
+}
+
+.OP-Caja a {
+  color: rgb(255, 255, 255); /* Cambia esto al color de texto deseado */
+  text-decoration: none;
+}
+
+.OP-Caja a:hover {
+  color: #0aa5ff; /* Cambia esto al color de texto deseado al pasar el cursor */
+}

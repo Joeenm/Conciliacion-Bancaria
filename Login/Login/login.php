@@ -32,8 +32,8 @@
         <div class="action-buttons">
           <button class="primary-button">Ingresar</button>
         </div>
+        
       </div>
-      
     </div>
   </body>
 </html>

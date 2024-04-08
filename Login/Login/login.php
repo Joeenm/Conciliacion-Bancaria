@@ -15,7 +15,7 @@
             <i class="fa-solid fa-font-awesome"></i>
           </a>
         </div>
-
+<!-- Encabezado -->
         <h1>Inicia Sesión</h1>
 
         <div class="email-log-in">

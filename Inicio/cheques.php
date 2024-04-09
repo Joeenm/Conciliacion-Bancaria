@@ -65,8 +65,8 @@ $conn = new mysqli($servername, $username, $password, $database);
               ?>
             </select>
             <h4>La suma de</h4>
-            <input type="text" id="suma-de" onkeyup="convertirNumeroALetras()" onkeypress="return SoloDinero(event)">
-            <input type="text" id="suma" value="Cantidad en letras" readonly>
+            <input type="text" id="suma-de" onkeyup="actualizarMonto()" onkeypress="return SoloDinero(event)">
+            <input type="text" id="suma" placeholder="Cantidad en letras" onkeypress="return SoloLetras(event)">
           </div>
 
           <div id="ck3">
@@ -103,7 +103,7 @@ $conn = new mysqli($servername, $username, $password, $database);
 
             <div id="og-2">
               <h4>Monto</h4>
-              <input type="text" id="monto-1">
+              <input type="text" id="monto-1" readonly>
             </div>
           </div>      
 

@@ -1,0 +1,97 @@
+#contenido {
+  max-width: 95%;
+  width: 100%;
+  background-color: hsl(0, 0%, 10%);
+  padding: 2vw 2vh;
+  border-radius: 16px;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#conciliacion{
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: left;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#centro {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+#conciliacion h2{
+    color: #333;
+    font-size: 20px;
+    margin: 0;
+}
+
+#mes-año {
+  display: flex;
+  color: #cab600;
+  font-size: 12px;
+  
+}
+
+#mes {
+  margin-right: 20px; /* Espacio entre "mes" y "año" */
+}
+
+#mes-año input[type="text"] {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Para Botón */
+.contenedor-boton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Agrega espacio arriba de los botones */
+}
+
+.realizarConciliacion {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0aa5ff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.realizarConciliacion:hover {
+  background-color: #007acc; /* Cambia el color de fondo al pasar el cursor */
+}
+
+ /* Estilos para la tabla */
+ #miTabla {
+  width: 100%; /* La tabla ocupa todo el ancho del contenedor */
+  border-collapse: collapse; /* Colapsa los bordes de las celdas */
+  color: #cab600;
+}
+
+#miTabla td {
+  padding: 10px; /* Ajusta el espaciado interno de las celdas */
+  background-color: transparent; /* Color de fondo transparente */
+  border: none; /* Elimina los bordes de las celdas */
+}
+
+/* Estilo específico para la celda con sangría */
+.sangria {
+  padding-left: 20px; /* Sangría de 20px a la izquierda */
+}

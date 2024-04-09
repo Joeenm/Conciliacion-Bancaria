@@ -46,6 +46,7 @@ function actualizarMonto() {
     document.getElementById("monto-1").value = valorSuma;
 }
 
+// Alerta de confirmación
 document.addEventListener("DOMContentLoaded", function() {
     const botonGuardar = document.querySelector(".boton");
   

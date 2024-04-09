@@ -1,4 +1,4 @@
-/* function SoloLetras(evento) {
+function SoloLetras(evento) {
     var letras = (evento.which) ? evento.which : evento.keyCode;
     if (letras == 8 || letras == 32) {
         return true;
@@ -7,7 +7,7 @@
     } else {
         return false;
     }
-} */
+}
 
 function SoloNumeros(evento) {
     var tomo = (evento.which) ? evento.which : evento.keyCode;
@@ -38,8 +38,39 @@ function SoloDinero(evento) {
     }
 }
 
+function actualizarMonto() {
+    // Obtener el valor ingresado en el primer input
+    var valorSuma = document.getElementById("suma-de").value;
+
+    // Mostrar el mismo valor en el segundo input
+    document.getElementById("monto-1").value = valorSuma;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const botonGuardar = document.querySelector(".boton");
+  
+    botonGuardar.addEventListener("click", function() {
+      const campos = document.querySelectorAll("input[type='text'], input[type='date'], select");
+      let camposVacios = false;
+  
+      campos.forEach(function(campo) {
+        if (campo.value.trim() === "") { // Verifica que el campo no esté vacío
+          camposVacios = true;
+          return;
+        }
+      });
+  
+      if (camposVacios) {
+        alert("Por favor completar todos los campos.");
+      } else {
+        // Aquí puedes agregar la lógica para guardar los datos
+        console.log("Todos los campos están llenos. Guardando datos...");
+      }
+    });
+  });
+
 // Función para convertir un número a letras
-function numeroALetras(numero) {
+/* function numeroALetras(numero) {
     // Array de unidades
     var unidades = ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve'];
 
@@ -129,4 +160,4 @@ function convertirNumeroALetras() {
 
     // Convertir el número a letras usando la función numeroALetras y mostrarlo en el campo "suma"
     document.getElementById("suma").value = numeroALetras(Number(numero));
-}
+} */

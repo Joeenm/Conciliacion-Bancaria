@@ -30,7 +30,7 @@
         </div>
 
         <div class="contenedor-boton">
-          <button class="realizarConciliacion">Realizar Conciliación</button>
+          <button class="botones">Realizar Conciliación</button>
         </div>
     </div>
 
@@ -73,50 +73,83 @@
     </div>
 
     <div id="libro-3">
-    <div id="menos">
-        <div class="sangria-mas-y-menos" id="">
-            <div><h2>Menos: Cheques girados <br>en el mes</h2></div>
-            <div class=""><input type="text"></div>
-        </div>
+      <div id="menos">
+          <div class="sangria-mas-y-menos" id="">
+              <div><h2>Menos: Cheques girados <br>en el mes</h2></div>
+              <div class=""><input type="text"></div>
+          </div>
 
-        <div class="sangria" id="">
-            <div><h2>Notas de Débitos</h2></div>
-            <div class="sangria-input-nota-debito"><input type="text"></div>
-        </div>
+          <div class="sangria" id="">
+              <div><h2>Notas de Débitos</h2></div>
+              <div class="sangria-input-nota-debito"><input type="text"></div>
+          </div>
 
-        <div class="sangria" id="ajustes">
-            <div><h2>Ajustes</h2></div>
-            <div class="sangria-input-ajuste"><input type="text"></div>
-        </div>
-    </div>
+          <div class="sangria" id="ajustes">
+              <div><h2>Ajustes</h2></div>
+              <div class="sangria-input-ajuste"><input type="text"></div>
+          </div>
+      </div>
 
-    <div id="subtotal">
-      <div id="subtotal-menos">
-        <div><h2>Subtotal de -</h2></div>
-        <div><input type="text"></div>
+      <div id="subtotal">
+        <div id="subtotal-menos">
+          <div><h2>Subtotal de -</h2></div>
+          <div><input type="text"></div>
+        </div>
       </div>
     </div>
+
+
+    <div id="saldo-libro-final">
+      <div id="libro-1">
+        <h2>SALDO CONCILIADO SEGÚN LIBROS AL: </h2>
+        <input type="text">
+      </div>
+    </div>
+
+    <!-- Línea divisora -->
+    <div class="div-con-linea"></div>
+
+    <div id="saldo-banco">
+      <div id="banco-1">
+        <div><h2>SALDO EN BANCO AL: </h2></div>
+        <div><input type="text"></div>
+      </div>
+
+      <div id= banco-2>
+        <div id="mas-depositos">
+          <div><h2>Más: Depósitos en Tránsito</h2></div>
+          <div><input type="text"></div>
+        </div>
+
+        <div id="menos-cheques">
+          <div><h2>Menos: Cheques en Circulción</h2></div>
+          <div><input type="text"></div>
+        </div>
+
+        <div id="mas-ajustes">
+          <div><h2>Más: Ajustes</h2></div>
+          <div><input type="text"></div>
+        </div>
+      </div>
+
+      <div id="subtotal-final">
+        <div id="subtotal-menos">
+          <div><h2>Subtotal</h2></div>
+          <div class="espacio"><input type="text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Línea divisora -->
+    <div class="div-con-linea"></div>
+
+    <div class="contenedor-boton">
+      <button class="botones">Grabar</button>
+      <button class="botones">Nuevo</button>
+    </div>
+    
   
 </div>
-
-<div id="saldo-libro-final">
-  <div id="libro-1">
-    <h2>SALDO CONCILIADO SEGÚN LIBROS AL: </h2>
-    <input type="text">
-  </div>
-</div>
-
-<!-- Línea divisora -->
-<div class="div-con-linea">
-</div>
-
-<div id="saldo-banco">
-  <div id="banco-1">
-    <div><h2>SALDO EN BANCO AL: </h2></div>
-    <div><input type="text"></div>
-  </div>
-</div>
-
 
 </body>
 </html>

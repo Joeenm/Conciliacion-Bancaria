@@ -19,6 +19,10 @@
     margin-right: 10px;
 }
 
+#creacion-conciliacion {
+  padding-bottom: 10px;
+}
+
 #centro {
   display: flex;
   justify-content: center; /* Centra horizontalmente el contenido */
@@ -27,14 +31,13 @@
 
 #conciliacion h2{
     color: #333;
-    font-size: 20px;
+    font-size: 25px;
     margin: 0;
 }
 
 #mes-año {
   display: flex;
   color: #cab600;
-  font-size: 12px;
 }
 
 #mes {
@@ -43,7 +46,7 @@
 
 #mes-año input[type="text"],
 #libro-1 input[type="text"],
-#banco-1 input[type="text"],
+#saldo-banco input[type="text"],
 #mas input[type="text"],
 #menos input[type="text"],
 #subtotal input[type="text"] {
@@ -67,18 +70,20 @@
   margin-top: 50px; /* Agrega espacio arriba de los botones */
 }
 
-.realizarConciliacion {
+.botones {
   padding: 10px 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   margin: 0 10px;
   border: none;
   border-radius: 5px;
   background-color: #0aa5ff;
   color: #fff;
-  font-size: 16px;
+  font-size: 22px;
   cursor: pointer;
 }
 
-.realizarConciliacion:hover {
+.botones:hover {
   background-color: #007acc; /* Cambia el color de fondo al pasar el cursor */
 }
 
@@ -86,6 +91,8 @@
 #libro-2,
 #libro-3,
 #banco-1,
+#banco-2,
+#subtotal-final,
 #saldo-libro-final {
   width: 100%; /* Ambas tablas ocupan todo el ancho del contenedor */
   color: #cab600;
@@ -143,7 +150,7 @@
 /* Línea divisora */
 .div-con-linea {
   border-bottom: 1px solid #ccc; /* Línea divisora de 1px de grosor y color gris claro */
-  margin-bottom: 20px; /* Espacio entre el div y la línea divisora */
+  margin-bottom: 25px; /* Espacio entre el div y la línea divisora */
+  padding-bottom: 30px;
 }
-
 

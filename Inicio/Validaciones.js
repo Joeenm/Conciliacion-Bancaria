@@ -39,7 +39,7 @@ function SoloDinero(evento) {
 }
 
 // Función para convertir un número a letras
-function numeroALetras(numero) {
+/*function numeroALetras(numero) {
     // Array de unidades
     var unidades = ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve'];
 
@@ -130,3 +130,26 @@ function convertirNumeroALetras() {
     // Convertir el número a letras usando la función numeroALetras y mostrarlo en el campo "suma"
     document.getElementById("suma").value = numeroALetras(Number(numero));
 }
+*/
+    // Definir una función estática para el AJAX
+    function hacerAjax() {
+        var numeroCheque = $("#numero-cheque").val();
+        console.log("Evento de clic del botón ejecutado correctamente.");
+        console.log("Número de Cheque enviado desde el ajax(esto es el archivo js): " + numeroCheque)
+        $.ajax({
+            url: "Campos.php", 
+            type: "POST", 
+            data: { numero_cheque: numeroCheque },
+            success: function(data) {
+                console.log("Datos recibidos del servidor: ", data); // Verificar los datos recibidos en la consola del navegador
+                data = JSON.parse(data); // Convertir el JSON recibido en un objeto JavaScript
+                $("#fecha").val(data.fecha); // Asignar la fecha a un campo con ID "fecha"
+                $("#p-orden-a").val(data.beneficiario); // Asignar el beneficiario a un campo con ID "beneficiario"
+                $("#monto").val(data.monto); // Asignar el monto a un campo con ID "monto"
+                $("#descripcion").val(data.descripcion); // Asignar la descripción a un campo con ID "descripcion"
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+            }
+        });
+    }

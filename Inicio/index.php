@@ -1,23 +1,4 @@
-<?php
-// Datos de conexión a la base de datos
-$servername = "localhost";
-$username = "d52024";
-$password = "12345";
-$database = "conciliación";
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-} else {
-  echo "<script>console.log('Conexión exitosa');</script>";
-}
-//Cerrar conexión (opcional, se cerrará automáticamente al final del script)
-//$conn->close();
-?>
-
+<?php require "db-conciliacion.php";?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,6 +9,8 @@ if ($conn->connect_error) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="styles.css">
     <script src="reloj.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="Validaciones.js"></script>
     <script src="cargaElementos.js" defer></script>
   </head>
   <body>
@@ -62,6 +45,5 @@ if ($conn->connect_error) {
     <div id="contenido">
 
     </div>
-
   </body>
 </html>

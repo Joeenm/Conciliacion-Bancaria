@@ -1,12 +1,4 @@
-<?php
-// Datos de conexión a la base de datos
-$servername = "localhost";
-$username = "d52024";
-$password = "12345";
-$database = "conciliación";
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $database);
-?>
+<?php require "db-conciliacion.php";?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,10 +6,12 @@ $conn = new mysqli($servername, $username, $password, $database);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anulación de Cheques</title>
     <link rel="stylesheet" href="StyleAnulacion.css">
-    <script src="Validaciones.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script defer src="Validaciones.js"></script>
 </head>
 <body>
-
+<form id="FRAnulacion" method="post">
+  
 <div id="titulo">
   <h1>Anulación de Cheques</h1>
 
@@ -26,13 +20,13 @@ $conn = new mysqli($servername, $username, $password, $database);
         <div id="contenido-cheques">
             
           <div id="ck1">
-            <div id="numero-cheque">
+            <div id="numerocheque">
                 <h4>No. de Cheque</h4>
-                <input type="text" id="numero-cheque" onkeypress="return SoloNumeros(event)">
+                <input type="text" id="numero-cheque" name="numero-cheque" onkeypress="return SoloNumeros(event)">
             </div>
             
             <div class="contenedor-botones">
-                <button class="boton">Buscar</button>
+                <button type="button" class="boton" id="boton-ajax" onclick="hacerAjax()" >Buscar</button>
               </div>
           
           </div>
@@ -40,7 +34,7 @@ $conn = new mysqli($servername, $username, $password, $database);
           <div id="FCH">
             <div id="Fecha">
                 <h4>Fecha</h4>
-                <input type="date" id="Fecha" readonly>
+                <input type="date" id="fecha"  readonly>
             </div>  
           </div>
 
@@ -48,17 +42,17 @@ $conn = new mysqli($servername, $username, $password, $database);
           <div id="ck2">
             <h4>Páguese a la orden de</h4>
             <div id="ck2-1">
-              <input type="text" id="p-orden-a" readonly>
+              <input type="text" id="p-orden-a"  readonly>
             </div>
         
             <h4>La suma de</h4>
-            <input type="text" readonly>
+            <input type="text" id="monto"  readonly>
            
           </div>
 
           <div id="ck3">
             <h4>Descripción de Gasto</h4>
-            <input type="text" readonly>
+            <input type="text" id="descripcion"  readonly>
           </div>
         </div>
         
@@ -76,8 +70,7 @@ $conn = new mysqli($servername, $username, $password, $database);
         </div>
 
     </div>
-
 </div>
-
+</form>
 </body>
 </html>

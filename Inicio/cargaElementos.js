@@ -12,13 +12,14 @@ function cargarInicio() {
   }
 
   function cargarAnulacionesCks() {
+    console.log("Función cargarAnulacionesCks() llamada");
     fetch('AnulacionCKS.php')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('contenido').innerHTML = data; 
-      })
-      .catch(error => console.error('Error al cargar la página:', error));
-  }
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('contenido').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar la página:', error));
+}
 
   function cargarSacarCirulacion() {
     document.getElementById('contenido').innerHTML = 'Contenido de Otras Transacciones';

@@ -1,0 +1,30 @@
+#contenido {
+  max-width: 95%;
+  width: 100%;
+  background-color: hsl(0, 0%, 10%);
+  padding: 2vw 2vh;
+  border-radius: 16px;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#sacarCirculacion{
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: left;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+#sacarCirculacionTitulo {
+  padding-bottom: 10px;
+}
+
+#sacarCirculacion h2{
+  color: #333;
+  font-size: 25px;
+  margin: 0;
+}

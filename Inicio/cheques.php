@@ -28,18 +28,18 @@
           <div id="ck1">
             <div id="numero-cheque">
                 <h4>No. de Cheque</h4>
-                <input type="text" id="input-numero-cheque" onkeypress="return SoloNumeros(event)">
+                <input type="text" id="input-numero-cheque" name="input-numero-cheque" onkeypress="return SoloNumeros(event)">
             </div>
             
             <div id="fecha">
                 <h4>Fecha</h4>
-                <input type="date" id="fecha">
+                <input type="date" id="fecha" name="fecha">
             </div>
           </div>
         
           <div id="ck2">
             <h4>Páguese a la orden de</h4>
-            <select type="text" id="p-orden-a">
+            <select type="text" id="p-orden-a" name="p-orden-a" >
               <option value=""></option>
             <?php
               $buscar_proveedores = mysqli_query($conn, "SELECT * FROM proveedores ORDER BY nombre ASC");

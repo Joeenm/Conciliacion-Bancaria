@@ -34,6 +34,9 @@
         </div>
     </div>
 
+    <!-- Línea divisora -->
+    <div class="div-con-linea"></div>
+
     <div id="saldo-libro">
        <div id="libro-1">
         <h2>SALDO SEGÚN LIBRO AL: </h2>

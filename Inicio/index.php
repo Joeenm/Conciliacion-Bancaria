@@ -28,7 +28,6 @@
           <ul class="OP-Caja">
             <li><a href="#" onclick="cargarAnulacionesCks()">Anulación</a></li>
             <li><a href="#" onclick="cargarSacarCirulacion()">Sacar de Circulación</a></li>
-            <li><a href="#" onclick="cargarReintegro()">Reintegro</a></li>
           </ul>
         </div>
           <a href="#" onclick="cargarOtrasTransacciones()">Otras Transacciones</a>

@@ -1,0 +1,156 @@
+#contenido {
+  max-width: 95%;
+  width: 100%;
+  background-color: hsl(0, 0%, 10%);
+  padding: 2vw 2vh;
+  border-radius: 16px;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#conciliacion{
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: left;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#creacion-conciliacion {
+  padding-bottom: 10px;
+}
+
+#centro {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+#conciliacion h2{
+    color: #333;
+    font-size: 25px;
+    margin: 0;
+}
+
+#mes-año {
+  display: flex;
+  color: #cab600;
+}
+
+#mes {
+  margin-right: 20px; /* Espacio entre "mes" y "año" */
+}
+
+#mes-año input[type="text"],
+#libro-1 input[type="text"],
+#saldo-banco input[type="text"],
+#mas input[type="text"],
+#menos input[type="text"],
+#subtotal input[type="text"] {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 25px; /* Ajusta la altura según lo necesites */
+  width: 200px; /* Ajusta el ancho según lo necesites */
+}
+
+/* Para Botón */
+.contenedor-boton {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px; /* Agrega espacio arriba de los botones */
+}
+
+.botones {
+  padding: 10px 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0aa5ff;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.botones:hover {
+  background-color: #007acc; /* Cambia el color de fondo al pasar el cursor */
+}
+
+#libro-1,
+#libro-2,
+#libro-3,
+#banco-1,
+#banco-2,
+#subtotal-final,
+#saldo-libro-final {
+  width: 100%; /* Ambas tablas ocupan todo el ancho del contenedor */
+  color: #cab600;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+#mas,
+#menos,
+#subtotal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Centra horizontalmente el contenido */
+}
+
+#mas div,
+#menos div,
+#subtotal div {
+  display: flex;
+  align-items: center;
+}
+
+#mas h2,
+#menos h2,
+#subtotal h2 {
+  margin-right: 10px;
+}
+
+.sangria {
+  padding-left: 180px; /* Sangría de 20px a la izquierda*/
+}
+
+.sangria-mas-y-menos {
+  padding-left: 130px; /* Sangría de 20px a la izquierda*/
+}
+
+.sangria-input-deposito {
+  padding-left: 110px; /* Sangría de 20px a la izquierda*/
+}
+
+.sangria-input-cheque-anu {
+  padding-left: 18px; /* Sangría de 20px a la izquierda*/
+}
+
+.sangria-input-ajuste {
+  padding-left: 130px; /* Sangría de 20px a la izquierda*/
+}
+
+.sangria-input-nota-debito {
+  padding-left: 35px; /* Sangría de 20px a la izquierda*/
+}
+
+/* Línea divisora */
+.div-con-linea {
+  border-bottom: 1px solid #ccc; /* Línea divisora de 1px de grosor y color gris claro */
+  margin-bottom: 25px; /* Espacio entre el div y la línea divisora */
+  padding-bottom: 30px;
+}
+

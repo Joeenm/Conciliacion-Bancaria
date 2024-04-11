@@ -22,20 +22,31 @@ function cargarInicio() {
 }
 
   function cargarSacarCirulacion() {
-    document.getElementById('contenido').innerHTML = 'Contenido de Otras Transacciones';
-  }
-
-  function cargarReintegro() {
-    document.getElementById('contenido').innerHTML = 'Contenido de Otras Transacciones';
+    fetch('sacarCirculacion.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('contenido').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar la página:', error));
   }
 
   function cargarOtrasTransacciones() {
-    document.getElementById('contenido').innerHTML = 'Contenido de Otras Transacciones';
+    fetch('otrasTransacciones.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('contenido').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar la página:', error));
   }
 
   function cargarConciliacion() {
-    document.getElementById('contenido').innerHTML = 'Contenido de Conciliación';
-  }
+    fetch('conciliacion.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('contenido').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar la página:', error));
+  } 
 
   function cargarReportes() {
     document.getElementById('contenido').innerHTML = 'Contenido de Reportes';

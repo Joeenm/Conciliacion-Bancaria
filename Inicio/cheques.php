@@ -1,12 +1,4 @@
-<?php
-// Datos de conexión a la base de datos
-$servername = "localhost";
-$username = "d52024";
-$password = "12345";
-$database = "conciliación";
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $database);
-?>
+<?php require "db-conciliacion.php"; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

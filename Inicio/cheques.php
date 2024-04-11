@@ -57,13 +57,13 @@
               ?>
             </select>
             <h4>La suma de</h4>
-            <input type="text" id="suma-de" onkeyup="actualizarMonto()" onkeypress="return SoloDinero(event)">
-            <input type="text" id="suma" placeholder="Cantidad en letras" onkeypress="return SoloLetras(event)">
+            <input type="text" id="suma-de" name="suma-de" onkeyup="actualizarMonto()" onkeypress="return SoloDinero(event)">
+            <input type="text" id="suma" name="suma" placeholder="Cantidad en letras" onkeypress="return SoloLetras(event)">
           </div>
 
           <div id="ck3">
             <h4>Detalle</h4>
-            <input type="text" maxlength="100">
+            <input type="text" id="DetallesCks" name="DetallesCks" maxlength="100">
           </div>
         </div>
         
@@ -71,7 +71,7 @@
     <div id="contenido-objeto-gastos">
           <div id="og-1">
               <h4>Objeto</h4>
-              <select type="text" id="objeto-1">
+              <select type="text" id="objeto-1" name="objeto-1" >
                 <optgroup label="SERVICIOS NO PERSONALES">
                   <?php
                     $buscar_objetos_gasto = mysqli_query($conn, "SELECT * FROM objeto_gasto WHERE codigo >= '120' AND codigo < '200' ORDER BY codigo ASC");
@@ -95,7 +95,7 @@
 
             <div id="og-2">
               <h4>Monto</h4>
-              <input type="text" id="monto-1" readonly>
+              <input type="text" id="monto-1" name="monto-1" readonly>
             </div>
           </div>      
 

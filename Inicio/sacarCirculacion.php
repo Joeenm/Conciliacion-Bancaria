@@ -26,8 +26,8 @@ $conn = new mysqli($servername, $username, $password, $database);
     </div>
 
 
-    <div class="contenedor-cheques">
-        <div id="contenido-cheques">
+    <div class="contenedor-sacarCirculacion">
+        <div id="contenido-sacarCirculacion">
             
           <div id="ck1">
             <div id="numero-cheque">
@@ -37,8 +37,7 @@ $conn = new mysqli($servername, $username, $password, $database);
             
             <div class="contenedor-botones">
                 <button class="boton">Buscar</button>
-              </div>
-          
+            </div>
           </div>
 
           <div id="FCH">
@@ -66,14 +65,12 @@ $conn = new mysqli($servername, $username, $password, $database);
           </div>
         </div>
         
-        <div class="contenedor-detalles-Anulación">
-          <div id="contenido-Detalle-Anulación">
+        <div class="contenedor-detalles-sacarCirculacion">
+          <div id="contenido-Detalle-sacarCirculacion">
             <div id="og-1">
-              <h4>Fecha de Anulación</h4>
+              <h4>Fecha/Banco</h4>
               <input type="date" id="objeto-1" readonly>
-              <h4>Detalle de Anulación</h4>
-              <input type="text" id="Objeto-2" readonly >
-              <button class="boton">Anular</button>
+              <button class="boton">Sacar de Circulación</button>
             </div>
           </div>
 

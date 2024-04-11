@@ -1,0 +1,93 @@
+#contenido {
+  max-width: 95%;
+  width: 100%;
+  background-color: hsl(0, 0%, 10%);
+  padding: 2vw 2vh;
+  border-radius: 16px;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#otrasTransacciones{
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: left;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+#otrasTransaccionesTitulo {
+  padding-bottom: 10px;
+}
+
+#otrasTransacciones h2{
+  color: #333;
+  font-size: 25px;
+  margin: 0;
+}
+
+.contenedor-otrasTransacciones {
+  display: flex;
+  flex-direction: row; /* Alinea los elementos en una fila */
+  justify-content: space-evenly; /* Distribuye el espacio disponible alrededor de los elementos */
+  align-items: top; /* Centra verticalmente los elementos */
+}
+
+/* Hasta aquí encabezado*/
+
+#transaccion h2,
+#monto h2,
+#fecha h2 {
+  color: #cab600;
+  text-align: left;
+  margin-right: 10px;
+  display: block; /* Convertir el h4 en un bloque */
+}
+
+#transaccion input[type="text"],
+#monto input[type="text"],
+#fecha input[type="date"] {
+  width: 130%; /* Ajusta el ancho al 100% del contenedor */
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Para Botón */
+.contenedor-boton {
+  display: flex;
+  justify-content: center;
+}
+
+.botones {
+  padding: 10px 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0aa5ff;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.botones:hover {
+  background-color: #007acc; /* Cambia el color de fondo al pasar el cursor */
+}
+
+/* Línea divisora */
+.div-con-linea {
+  border-bottom: 1px solid #ccc; /* Línea divisora de 1px de grosor y color gris claro */
+  margin-bottom: 25px; /* Espacio entre el div y la línea divisora */
+  padding-bottom: 30px;
+}

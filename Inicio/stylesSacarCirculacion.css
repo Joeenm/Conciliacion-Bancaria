@@ -28,3 +28,105 @@
   font-size: 25px;
   margin: 0;
 }
+
+.contenedor-sacarCirculacion {
+  display: flex;
+  flex-direction: row; /* Alinea los elementos en una fila */
+  justify-content: space-around; /* Distribuye el espacio disponible alrededor de los elementos */
+  align-items: top; /* Centra verticalmente los elementos */
+}
+
+/* Hasta aquí encabezado*/
+
+#ck1, #contenido-Detalle-sacarCirculacion{
+  display: flex;
+  justify-content: space-between;
+}
+
+.contenedor-sacarCirculacion {
+  display: flex;
+  flex-direction: row; /* Alinea los elementos en una fila */
+  justify-content: space-around; /* Distribuye el espacio disponible alrededor de los elementos */
+  align-items:flex-start ; /* Centra verticalmente los elementos */
+}
+
+#ck1 h4,
+#FCH,
+#og-1 h4,
+#ck2 h4,
+#ck3 h4 {
+  color: #cab600;
+  text-align: left;
+  margin-right: 10px;
+  display: block; /* Convertir el h4 en un bloque */
+}
+
+#ck1 input[type="text"],
+#ck1 input[type="date"],
+#FCH input[type="date"],
+#og-1 input[type="date"],
+#og-1 input[type="text"],
+#ck2 input[type="text"],
+#ck2-1 input[type="text"],
+#ck3 input[type="text"] {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el input dentro de #ck1 */
+#ck1 input[type="text"] {
+  width: 150px; /* Cambiar el tamaño del input en #ck1 */
+}
+
+/* Estilo para el input dentro de #ck2 */
+#ck2 input[type="text"] {
+  height:30px ;
+  width: 170px; /* Cambiar el tamaño del input en #ck2 */
+}
+#ck2-1 input[type="text"] {
+  height:50px ;
+  width: 100%; /* Cambiar el tamaño del input en #ck2 */
+}
+
+/* Estilo para el input dentro de #ck3 */
+#ck3 input[type="text"] {
+  height:70px ;
+  width: 100%; /* Cambiar el tamaño del input en #ck3 */
+  box-sizing: border-box;
+}
+#og-1 input[type="text"]{
+  width: 100%;
+  margin-bottom: 160px;
+  height:100px ;
+  box-sizing: border-box;
+}
+
+.contenedor-botones {
+  display:flex;
+  justify-content: center;
+  line-height: 50px;
+  margin-top: 60px; /* Agrega espacio arriba de los botones */
+}
+
+.boton {
+  padding: 5px 20px;
+  line-height: 20px;
+  margin: 0 100px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0aa5ff;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #007acc; /* Cambia el color de fondo al pasar el cursor */
+}

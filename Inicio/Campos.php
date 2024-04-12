@@ -4,8 +4,10 @@ include 'db-conciliacion.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
       mostrarAnulación(); 
+      EnvioCks();
   } 
 }
+
 
 function mostrarAnulación(){
   //echo "<pre>";
@@ -50,3 +52,33 @@ function mostrarAnulación(){
     echo json_encode(array('error' => 'No entro en el if'));
   }
 }
+
+function EnvioCks(){
+  // Obtener los datos del formulario
+  $NoCheque = trim($_POST['input-numero-cheque']);
+  $FechaCks = trim($_POST['fecha']);
+  $Beneficiarios = trim($_POST['p-orden-a']);
+  $Monto = trim($_POST['suma-de']);
+  $Detalle = trim($_POST['DetalleCks']);
+ 
+     // Verificar si las variables estan definidas
+     if(isset($NoCheque,$FechaCks)){
+         global $conn;
+         // Escapar las variables para evitar inyección SQL
+         $NoCheque = $conn->real_escape_string($NoCheque);
+         $FechaCks = $conn->real_escape_string($FechaCks);
+ 
+         // Crear la consulta SQL para insertar el número de cheque y la fecha en una sola consulta
+         $sql = "INSERT INTO cheques (numero_cheque, fecha, beneficiario, monto, descripcion, ) VALUES ('$NoCheque', '$FechaCks','$Beneficiarios','$Monto','$Detalle')";
+         
+         // Ejecutar la consulta
+         if(mysqli_query($conn, $sql)){
+             echo json_encode(array( 'Datos guardados'));
+         } else {
+             echo json_encode(array('Error al insertar datos ' . mysqli_error($conn) ));
+            
+         }
+     } else {
+         echo json_encode(array( 'Las varibales no estan definidas'));
+     }
+ }

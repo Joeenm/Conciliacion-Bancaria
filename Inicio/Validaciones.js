@@ -47,10 +47,10 @@ function actualizarMonto() {
 }
 
 // Alerta de confirmación
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
     const botonGuardar = document.querySelector(".boton");
   
-    botonGuardar.addEventListener("click", function() {
+    botonGuardar.addEventListener("click",function() {
       const campos = document.querySelectorAll("input[type='text'], input[type='date'], select");
       let camposVacios = false;
   
@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (campo.value.trim() === "") { // Verifica que el campo no esté vacío
           camposVacios = true;
           return;
+
         }
       });
   
@@ -69,26 +70,93 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
-
+*/
     // Definir una función estática para el AJAX
     function hacerAjax() {
-        var numeroCheque = $("#numero-cheque").val();
-        console.log("Evento de clic del botón ejecutado correctamente.");
-        console.log("Número de Cheque enviado desde el ajax(esto es el archivo js): " + numeroCheque)
-        $.ajax({
-            url: "Campos.php", 
-            type: "POST", 
-            data: { numero_cheque: numeroCheque },
-            success: function(data) {
-                console.log("Datos recibidos del servidor: ", data); // Verificar los datos recibidos en la consola del navegador
-                data = JSON.parse(data); // Convertir el JSON recibido en un objeto JavaScript
-                $("#fecha").val(data.fecha); // Asignar la fecha a un campo con ID "fecha"
-                $("#p-orden-a").val(data.beneficiario); // Asignar el beneficiario a un campo con ID "beneficiario"
-                $("#monto").val(data.monto); // Asignar el monto a un campo con ID "monto"
-                $("#descripcion").val(data.descripcion); // Asignar la descripción a un campo con ID "descripcion"
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
-            }
-        });
-    }
+      var numeroCheque = $("#numero-cheque").val();
+      console.log("Evento de clic del botón ejecutado correctamente.");
+      console.log("Número de Cheque enviado desde el ajax(esto es el archivo js): " + numeroCheque)
+      $.ajax({
+          url: "Campos.php", 
+          type: "POST", 
+          data: { numero_cheque: numeroCheque },
+          success: function(data) {
+              try {
+                  data = JSON.parse(data);
+                  console.log("Datos recibidos del servidor: ", data);
+                  
+                  // Actualizar los campos del formulario si la respuesta es válida
+                  $("#fecha").val(data.fecha);
+                  if (data.beneficiario !== null && data.beneficiario !== '00000') {
+                      $("#p-orden-a").val(data.beneficiario);
+                  } else {
+                      $("#p-orden-a").val("");
+                  }
+                  $("#monto").val(data.monto);
+                  $("#descripcion").val(data.descripcion);
+              } catch (error) {
+                  console.error("Error al analizar la respuesta JSON:", error);
+                  // Si hay un error al analizar la respuesta, no hacemos nada
+              }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+              // Si hay un error en la solicitud AJAX, no hacemos nada
+          }
+      });
+  }
+  
+
+function GrabaraCKs(event){
+  event.preventDefault();
+  $.ajax({
+    type: "POST",
+    url: "Envicks.php",
+    data: $("#FormularioCks").serialize(),
+      success: function(resp){
+        if(resp=='0'){
+          } else {
+          // Aquí deberías manejar el caso en que la respuesta no sea '0'
+        console.log("La respuesta no es '0':", resp);
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+      }
+  })
+    $("#input-numero-cheque").val('');
+    $("#fecha").val('');
+    $("#p-orden-a").val('');
+    $("#suma-de").val('');
+    $("#suma").val('');
+    $("#DetallesCks").val('');
+    $("#objeto-1").val('');
+    $("#monto-1").val('');
+}
+
+function Anular(event){
+  event.preventDefault();
+  $.ajax({
+    type :"POST",
+    url: "AnularUpDate.php",
+    data: $("#FRAnulacion").serialize(),
+    success: function(resp){
+        if(resp=='0'){
+          } else {
+          // Aquí deberías manejar el caso en que la respuesta no sea '0'
+        console.log("La respuesta no es '0':");
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+      }
+  })
+  $("#numero-cheque").val('');
+  $("#fecha").val('');
+  $("#monto").val('');
+  $("#p-orden-a").val('');  
+  $("#descripcion").val('');
+  $("#objeto-1").val('');
+  $("#Objeto-2").val('');
+
+}

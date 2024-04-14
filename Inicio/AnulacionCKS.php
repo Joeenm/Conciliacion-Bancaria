@@ -10,7 +10,7 @@
 <script defer src="Validaciones.js"></script>
 </head>
 <body>
-<form id="FRAnulacion" method="post">
+<form id="FRAnulacion" name="FRAnulacion" method="post">
   
 <div id="titulo">
   <h1>Anulación de Cheques</h1>
@@ -34,7 +34,7 @@
           <div id="FCH">
             <div id="Fecha">
                 <h4>Fecha</h4>
-                <input type="date" id="fecha"  readonly>
+                <input type="date" id="fecha" name="fecha"  readonly>
             </div>  
           </div>
 
@@ -42,17 +42,17 @@
           <div id="ck2">
             <h4>Páguese a la orden de</h4>
             <div id="ck2-1">
-              <input type="text" id="p-orden-a"  readonly>
+              <input type="text" id="p-orden-a" name="p-orden-a"  readonly>
             </div>
         
             <h4>La suma de</h4>
-            <input type="text" id="monto"  readonly>
+            <input type="text" id="monto" name="monto" readonly>
            
           </div>
 
           <div id="ck3">
             <h4>Descripción de Gasto</h4>
-            <input type="text" id="descripcion"  readonly>
+            <input type="text" id="descripcion" name="descripcion" readonly>
           </div>
         </div>
         
@@ -60,10 +60,10 @@
           <div id="contenido-Detalle-Anulación">
             <div id="og-1">
               <h4>Fecha de Anulación</h4>
-              <input type="date" id="objeto-1" readonly>
+              <input type="date" id="objeto-1" name="objeto-1" >
               <h4>Detalle de Anulación</h4>
-              <input type="text" id="Objeto-2" readonly >
-              <button class="boton">Anular</button>
+              <input type="text" id="Objeto-2" name="Objeto-2" >
+              <button class="boton" onclick="Anular(event)" >Anular</button>
             </div>
           </div>
 

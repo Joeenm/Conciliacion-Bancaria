@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creación de Cheques</title>
     <link rel="stylesheet" href="stylesCheques.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="validaciones.js"></script>
 </head>
 <body>
-
+<form id="FormularioCks" name="FormularioCks" >
+  
 <div id="titulo">
   <h1>Creación de Cheques</h1>
 
@@ -102,12 +104,13 @@
     </div>
 
     <div class="contenedor-botones">
-      <button class="boton">Grabar</button>
+      <button class="boton" id="Grabarcks" name="Grabarcks" onclick="GrabaraCKs(event)">Grabar</button>
       <button class="boton">Imprimir</button>
       <button class="boton">Nuevo</button>
     </div>
 
 </div>
 
+</form>
 </body>
 </html>

@@ -2,83 +2,58 @@
 include 'db-conciliacion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-      mostrarAnulación(); 
-      EnvioCks();
-  } 
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        mostrarAnulación(); 
+    } 
 }
 
-
 function mostrarAnulación(){
-  //echo "<pre>";
-  //print_r($_POST);
-  //echo "</pre>";
-  //echo "<script>console.log('la funcion sirve en php');</script>";
-  
-  // Trim para eliminar espacios en blanco alrededor del número de cheque
-  $numero_cheque = trim($_POST['numero_cheque']);
-  
-  // Convertir a mayúsculas o minúsculas para evitar problemas de sensibilidad
-  $numero_cheque = strtolower($numero_cheque); // Puedes usar strtolower o strtoupper según tu preferencia
-  
-  if (isset($numero_cheque)) {
-     // echo "<script>console.log('se ha entrado en el primer if');</script>";
+  // Verificar si se recibió el número de cheque
+  if (isset($_POST['numero_cheque'])) {
       global $conn;
       
-      // Limpiar el número de cheque nuevamente después de la conversión de mayúsculas o minúsculas
+      // Limpiar y obtener el número de cheque
+      $numero_cheque = trim($_POST['numero_cheque']);
       $numero_cheque = $conn->real_escape_string($numero_cheque);
       
-      //echo "<script>console.log('El cheque es: " . $numero_cheque . "');</script>";
+      // Consultar la base de datos para obtener la información del cheque
       $sql = "SELECT * FROM cheques WHERE numero_cheque = '$numero_cheque'";
-     // echo "<script>console.log('Consulta SQL: " . $sql . "');</script>";
       $result = $conn->query($sql);
-     // echo "<script>console.log('El cheque exite, el metodo post sirvio');</script>";
+      
       if ($result->num_rows > 0) {
-         // echo "<script>console.log('se ha entrado en el segundo if');</script>";
-          // Mostrar o mejor dicho asignar los resultados en los campos correspondientes
+          // Obtener los datos del cheque
           $row = $result->fetch_assoc();
+          
+          // Obtener el nombre del beneficiario
+          $beneficiario = $row['beneficiario'];
+          $sql_beneficiario = "SELECT nombre FROM proveedores WHERE codigo = '$beneficiario'";
+          $result_beneficiario = $conn->query($sql_beneficiario);
+          
+          if ($result_beneficiario && $result_beneficiario->num_rows > 0) {
+              $row_beneficiario = $result_beneficiario->fetch_assoc();
+              $nombre_beneficiario = $row_beneficiario['nombre'];
+          } else {
+              // Manejar el caso en que no se pueda obtener el nombre del beneficiario
+              $nombre_beneficiario = '';
+          }
+                  
+          // Preparar la respuesta JSON
           $response = array(
               'fecha' => $row['fecha'],
-              'beneficiario' => $row['beneficiario'],
+              'beneficiario' => $nombre_beneficiario,
               'monto' => $row['monto'],
               'descripcion' => $row['descripcion']
           );
-          echo json_encode($response); // Devolver la respuesta como JSON
-          return; // Asegúrate de salir de la función después de enviar la respuesta
+          // Devolver la respuesta como JSON
+          echo json_encode($response);
+          return;
       } else {
+          // Si no se encuentra el cheque, devolver un mensaje de error
           echo json_encode(array('error' => 'No se encontró el cheque'));
       }
   } else {
-    echo json_encode(array('error' => 'No entro en el if'));
+      // Si no se recibió el número de cheque, devolver un mensaje de error
+      echo json_encode(array('error' => 'No se proporcionó el número de cheque'));
   }
 }
-
-function EnvioCks(){
-  // Obtener los datos del formulario
-  $NoCheque = trim($_POST['input-numero-cheque']);
-  $FechaCks = trim($_POST['fecha']);
-  $Beneficiarios = trim($_POST['p-orden-a']);
-  $Monto = trim($_POST['suma-de']);
-  $Detalle = trim($_POST['DetalleCks']);
- 
-     // Verificar si las variables estan definidas
-     if(isset($NoCheque,$FechaCks)){
-         global $conn;
-         // Escapar las variables para evitar inyección SQL
-         $NoCheque = $conn->real_escape_string($NoCheque);
-         $FechaCks = $conn->real_escape_string($FechaCks);
- 
-         // Crear la consulta SQL para insertar el número de cheque y la fecha en una sola consulta
-         $sql = "INSERT INTO cheques (numero_cheque, fecha, beneficiario, monto, descripcion, ) VALUES ('$NoCheque', '$FechaCks','$Beneficiarios','$Monto','$Detalle')";
-         
-         // Ejecutar la consulta
-         if(mysqli_query($conn, $sql)){
-             echo json_encode(array( 'Datos guardados'));
-         } else {
-             echo json_encode(array('Error al insertar datos ' . mysqli_error($conn) ));
-            
-         }
-     } else {
-         echo json_encode(array( 'Las varibales no estan definidas'));
-     }
- }
+?>

@@ -2,7 +2,7 @@
 include 'db-conciliacion.php';
 
 global $conn;
-$numeroCK = trim($_POST['numero-cheque']);
+$numeroCK = trim($_POST['numero_cheque']);
 echo json_encode('Aqui verifico si existe el numero de cheque');
 echo json_encode($numeroCK);
 $Fecha_Anulado = trim($_POST['objeto-1']);

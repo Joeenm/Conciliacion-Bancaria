@@ -7,7 +7,7 @@
     <title>Anulación de Cheques</title>
     <link rel="stylesheet" href="StyleAnulacion.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script defer src="Validaciones.js"></script>
+    <script defer src="Validaciones.js"></script>
 </head>
 <body>
 <form id="FRAnulacion" name="FRAnulacion" method="post">
@@ -22,11 +22,11 @@
           <div id="ck1">
             <div id="numerocheque">
                 <h4>No. de Cheque</h4>
-                <input type="text" id="numero-cheque" name="numero-cheque" onkeypress="return SoloNumeros(event)">
+                <input type="text" id="numero_cheque" name="numero_cheque" onkeypress="return SoloNumeros(event)">
             </div>
             
             <div class="contenedor-botones">
-                <button type="button" class="boton" id="boton-ajax" onclick="hacerAjax()" >Buscar</button>
+                <button type="button" class="boton" id="boton-ajax" onclick="BusquedaCK()" >Buscar</button>
               </div>
           
           </div>

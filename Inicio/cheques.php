@@ -76,7 +76,7 @@
               <select type="text" id="objeto-1" name="objeto-1" >
                 <optgroup label="SERVICIOS NO PERSONALES">
                   <?php
-                    $buscar_objetos_gasto = mysqli_query($conn, "SELECT * FROM objeto_gasto WHERE codigo >= '120' AND codigo < '200' ORDER BY codigo ASC");
+                    $buscar_objetos_gasto = mysqli_query($conn, "SELECT * FROM objeto_gasto WHERE objeto = 1 ORDER BY codigo ASC");
                     // Iterar a través de los resultados y generar las opciones HTML
                     while ($objeto_gasto = mysqli_fetch_assoc($buscar_objetos_gasto)) {
                         echo "<option value='" . $objeto_gasto['codigo'] . "'>" . $objeto_gasto['codigo'] . "-" . $objeto_gasto['detalle'] . "</option>";
@@ -85,7 +85,16 @@
                 </optgroup>
                 <optgroup label="MATERIALES DE SUMINISTROS">
                   <?php
-                    $buscar_objetos_gasto = mysqli_query($conn, "SELECT * FROM objeto_gasto WHERE codigo >= '200' AND codigo < '320' ORDER BY codigo ASC");
+                    $buscar_objetos_gasto = mysqli_query($conn, "SELECT * FROM objeto_gasto WHERE objeto = 2 ORDER BY codigo ASC");
+                    // Iterar a través de los resultados y generar las opciones HTML
+                    while ($objeto_gasto = mysqli_fetch_assoc($buscar_objetos_gasto)) {
+                        echo "<option value='" . $objeto_gasto['codigo'] . "'>" . $objeto_gasto['codigo'] . "-" . $objeto_gasto['detalle'] . "</option>";
+                    }
+                  ?>
+                </optgroup>
+                <optgroup label="MAQUINARIA Y EQUIPO">
+                  <?php
+                    $buscar_objetos_gasto = mysqli_query($conn, "SELECT * FROM objeto_gasto WHERE objeto = 3 ORDER BY codigo ASC");
                     // Iterar a través de los resultados y generar las opciones HTML
                     while ($objeto_gasto = mysqli_fetch_assoc($buscar_objetos_gasto)) {
                         echo "<option value='" . $objeto_gasto['codigo'] . "'>" . $objeto_gasto['codigo'] . "-" . $objeto_gasto['detalle'] . "</option>";

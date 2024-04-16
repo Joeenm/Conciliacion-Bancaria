@@ -190,13 +190,15 @@ function OTransacciones(event){
   event.preventDefault();
   $.ajax({
     type :"POST",
-    url: "OtrasTranSInSert.php",
+    url: "OTGrabar.php",
     data: $("#FROtrasT").serialize(),
     success: function(resp){
+      console.log(resp);
         if(resp=='0'){
           } else {
           // Aquí deberías manejar el caso en que la respuesta no sea '0'
         console.log("La respuesta no es '0':");
+        
           }
       },
       error: function(jqXHR, textStatus, errorThrown) {

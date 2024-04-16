@@ -10,7 +10,7 @@
       <script defer src="Validaciones.js"></script>
   </head>
   <body>
-  <form id="FROtrasT" name="FROtrasT" >
+  <form id="FROtrasT" name="FROtrasT" methomethod="post" >
     <div id="contenido">
         <div id="otrasTransaccionesTitulo">
             <div id="otrasTransacciones">
@@ -57,7 +57,7 @@
             </div>
             <div id="monto">
               <h2>Monto</h2>
-                <input type="text" id="Monto" name="Monto" >
+                <input type="text" id="Monto" name="Monto" onkeypress="return SoloDinero(event)" >
             </div>
           </div>
         </div>

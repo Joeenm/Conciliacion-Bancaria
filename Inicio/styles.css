@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Ubuntu", sans-serif;
-  background-image: url('fondo.jpeg');
+  background-image: url('background.jpeg');
   background-size: cover;
   background-repeat: repeat;
   background-position: top;

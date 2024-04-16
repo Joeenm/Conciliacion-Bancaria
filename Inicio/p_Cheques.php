@@ -7,7 +7,7 @@
     <title>Creación de Cheques</title>
     <link rel="stylesheet" href="stylesCheques.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="validaciones.js"></script>
+    <script src="f_Validaciones.js"></script>
 </head>
 <body>
 <form id="FormularioCks" name="FormularioCks" >

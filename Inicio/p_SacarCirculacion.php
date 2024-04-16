@@ -7,7 +7,7 @@
     <title>Sacar Cheques de Circulación</title>
     <link rel="stylesheet" href="stylesSacarCirculacion.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="Validaciones.js"></script>
+    <script defer src="f_Validaciones.js"></script>
 </head>
 <body>
 <form id="FRCirculacion" name="FRCirculacion" method="post">

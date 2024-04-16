@@ -47,7 +47,6 @@
   display: block; /* Convertir el h4 en un bloque */
 }
 
-#transaccion input[type="text"],
 #monto input[type="text"],
 #fecha input[type="date"] {
   width: 130%; /* Ajusta el ancho al 100% del contenedor */
@@ -60,6 +59,14 @@
   line-height: 1.5;
   background-color: #f9f9f9;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#transaccion-monto select[type="text"]
+ {
+  width: 250px; /* Ancho del select, ajusta según tus necesidades */
+  padding: 5px; /* Espaciado interno del select */
+  font-size: 15px; 
+  border-radius: 10px;
 }
 
 /* Para Botón */

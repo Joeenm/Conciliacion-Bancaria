@@ -72,8 +72,8 @@ function actualizarMonto() {
   });
 */
     // Definir una función estática para el AJAX
-    function hacerAjax() {
-      var numeroCheque = $("#numero-cheque").val();
+    function BusquedaCK() {
+      var numeroCheque = $("#numero_cheque").val();
       console.log("Evento de clic del botón ejecutado correctamente.");
       console.log("Número de Cheque enviado desde el ajax(esto es el archivo js): " + numeroCheque)
       $.ajax({
@@ -105,7 +105,6 @@ function actualizarMonto() {
           }
       });
   }
-  
 
 function GrabaraCKs(event){
   event.preventDefault();
@@ -151,7 +150,7 @@ function Anular(event){
         console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
       }
   })
-  $("#numero-cheque").val('');
+  $("#numero_cheque").val('');
   $("#fecha").val('');
   $("#monto").val('');
   $("#p-orden-a").val('');  
@@ -159,4 +158,52 @@ function Anular(event){
   $("#objeto-1").val('');
   $("#Objeto-2").val('');
 
+}
+
+function Circulacion(event){
+  event.preventDefault();
+  $.ajax({
+    type :"POST",
+    url: "CirculacionUpDate.php",
+    data: $("#FRCirculacion").serialize(),
+    success: function(resp){
+        if(resp=='0'){
+          } else {
+          // Aquí deberías manejar el caso en que la respuesta no sea '0'
+        console.log("La respuesta no es '0':");
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+      }
+  })
+  $("#numero_cheque").val('');
+  $("#fecha").val('');
+  $("#monto").val('');
+  $("#p-orden-a").val('');  
+  $("#descripcion").val('');
+  $("#objeto-1").val('');
+
+}
+
+function OTransacciones(event){
+  event.preventDefault();
+  $.ajax({
+    type :"POST",
+    url: "OtrasTranSInSert.php",
+    data: $("#FROtrasT").serialize(),
+    success: function(resp){
+        if(resp=='0'){
+          } else {
+          // Aquí deberías manejar el caso en que la respuesta no sea '0'
+        console.log("La respuesta no es '0':");
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+      }
+  })
+  $("#Fecha").val('');
+  $("#transaccion").val('');
+  $("#Monto").val('');
 }

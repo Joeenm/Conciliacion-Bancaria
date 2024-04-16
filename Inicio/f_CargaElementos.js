@@ -3,7 +3,7 @@ function cargarInicio() {
 }
 
   function cargarCheques() {
-    fetch('cheques.php')
+    fetch('p_Cheques.php')
       .then(response => response.text())
       .then(data => {
         document.getElementById('contenido').innerHTML = data;
@@ -13,7 +13,7 @@ function cargarInicio() {
 
   function cargarAnulacionesCks() {
     console.log("Función cargarAnulacionesCks() llamada");
-    fetch('AnulacionCKS.php')
+    fetch('p_Anulacion.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('contenido').innerHTML = data;
@@ -22,7 +22,7 @@ function cargarInicio() {
 }
 
   function cargarSacarCirulacion() {
-    fetch('sacarCirculacion.php')
+    fetch('p_SacarCirculacion.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('contenido').innerHTML = data;
@@ -31,7 +31,7 @@ function cargarInicio() {
   }
 
   function cargarOtrasTransacciones() {
-    fetch('otrasTransacciones.php')
+    fetch('p_OtrasTransacciones.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('contenido').innerHTML = data;
@@ -40,7 +40,7 @@ function cargarInicio() {
   }
 
   function cargarConciliacion() {
-    fetch('conciliacion.php')
+    fetch('p_Conciliacion.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('contenido').innerHTML = data;

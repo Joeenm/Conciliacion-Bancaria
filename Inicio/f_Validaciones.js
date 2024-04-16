@@ -77,7 +77,7 @@ function actualizarMonto() {
       console.log("Evento de clic del botón ejecutado correctamente.");
       console.log("Número de Cheque enviado desde el ajax(esto es el archivo js): " + numeroCheque)
       $.ajax({
-          url: "Campos.php", 
+          url: "c_BusquedaCampos.php", 
           type: "POST", 
           data: { numero_cheque: numeroCheque },
           success: function(data) {
@@ -110,7 +110,7 @@ function GrabaraCKs(event){
   event.preventDefault();
   $.ajax({
     type: "POST",
-    url: "Envicks.php",
+    url: "c_EnviCKS.php",
     data: $("#FormularioCks").serialize(),
       success: function(resp){
         if(resp=='0'){
@@ -137,7 +137,7 @@ function Anular(event){
   event.preventDefault();
   $.ajax({
     type :"POST",
-    url: "AnularUpDate.php",
+    url: "c_AnularUpDate.php",
     data: $("#FRAnulacion").serialize(),
     success: function(resp){
         if(resp=='0'){
@@ -164,7 +164,7 @@ function Circulacion(event){
   event.preventDefault();
   $.ajax({
     type :"POST",
-    url: "CirculacionUpDate.php",
+    url: "c_CirculacionUpDate.php",
     data: $("#FRCirculacion").serialize(),
     success: function(resp){
         if(resp=='0'){
@@ -190,7 +190,7 @@ function OTransacciones(event){
   event.preventDefault();
   $.ajax({
     type :"POST",
-    url: "OTGrabar.php",
+    url: "c_OTGrabar.php",
     data: $("#FROtrasT").serialize(),
     success: function(resp){
       console.log(resp);

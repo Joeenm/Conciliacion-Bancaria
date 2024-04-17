@@ -106,32 +106,51 @@ function actualizarMonto() {
       });
   }
 
-function GrabaraCKs(event){
-  event.preventDefault();
-  $.ajax({
-    type: "POST",
-    url: "c_EnviCKS.php",
-    data: $("#FormularioCks").serialize(),
-      success: function(resp){
-        if(resp=='0'){
-          } else {
-          // Aquí deberías manejar el caso en que la respuesta no sea '0'
-        console.log("La respuesta no es '0':", resp);
-          }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+  // Prueba de Campos vacios = No envia
+  // Prueba de Campos completos = Guardar Exitoso
+  // Falta prueba de Cheque existente
+  function GrabaraCKs(event){
+    event.preventDefault();
+
+    // Validar campos vacíos
+    var camposVacios = false;
+    $("#FormularioCks input[type='text']").each(function() {
+      if ($(this).val() === '') {
+        camposVacios = true;
+        return false; // Salir del bucle si se encuentra un campo vacío
       }
-  })
-    $("#input-numero-cheque").val('');
-    $("#fecha").val('');
-    $("#p-orden-a").val('');
-    $("#suma-de").val('');
-    $("#suma").val('');
-    $("#DetallesCks").val('');
-    $("#objeto-1").val('');
-    $("#monto-1").val('');
-}
+    });
+    
+    if (camposVacios) {
+      alert("Por favor, complete todos los campos.");
+      return; // Detener la ejecución si hay campos vacíos
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "c_EnviCKS.php",
+      data: $("#FormularioCks").serialize(),
+        success: function(resp){
+          if(resp=='0'){
+            } else {
+            // Aquí deberías manejar el caso en que la respuesta no sea '0'
+          console.log("La respuesta no es '0':", resp);
+          alert("El cheque se guardó correctamente.");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+        }
+    })
+      $("#input-numero-cheque").val('');
+      $("#fecha").val('');
+      $("#p-orden-a").val('');
+      $("#suma-de").val('');
+      $("#suma").val('');
+      $("#DetallesCks").val('');
+      $("#objeto-1").val('');
+      $("#monto-1").val('');
+  }
 
 function Anular(event){
   event.preventDefault();

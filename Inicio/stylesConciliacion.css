@@ -2,7 +2,6 @@
   max-width: 95%;
   width: 100%;
   background-color: hsl(0, 0%, 10%);
-  padding: 2vw 2vh;
   border-radius: 16px;
   margin: 2vw auto;
   display: flex;
@@ -17,10 +16,6 @@
     text-align: left;
     flex-grow: 1;
     margin-right: 10px;
-}
-
-#creacion-conciliacion {
-  padding-bottom: 10px;
 }
 
 #centro {
@@ -45,29 +40,33 @@
 }
 
 #mes-año input[type="text"],
-#libro-1 input[type="text"],
-#saldo-banco input[type="text"],
-#mas input[type="text"],
-#menos input[type="text"],
-#subtotal input[type="text"] {
+.div-3x6 input[type="text"] {
   margin-right: 10px;
+  margin-top: 12px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: normal;
   line-height: 1.5;
   background-color: #f9f9f9;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 25px; /* Ajusta la altura según lo necesites */
-  width: 200px; /* Ajusta el ancho según lo necesites */
+  height: 40px; /* Ajusta la altura según lo necesites */
+  width: 300px; /* Ajusta el ancho según lo necesites */
+}
+
+.input-derecha {
+  text-align: right;
 }
 
 /* Para Botón */
-.contenedor-boton {
+.primer-boton{
+  margin-top: 80px; /* Agrega espacio arriba del botón */
+}
+
+.contenedor-botones {
   display: flex;
   justify-content: center;
-  margin-top: 50px; /* Agrega espacio arriba de los botones */
 }
 
 .botones {
@@ -90,61 +89,34 @@
 #libro-1,
 #libro-2,
 #libro-3,
+#libro-4,
+#libro-5,
+#libro-6,
+#libro-7,
+#libro-8,
+#libro-9,
 #banco-1,
 #banco-2,
-#subtotal-final,
-#saldo-libro-final {
-  width: 100%; /* Ambas tablas ocupan todo el ancho del contenedor */
+#banco-3,
+#banco-4,
+#subtotal,
+#primer-subtotal,
+#saldo-libro-final,
+#saldo-banco-final {
   color: #cab600;
   display: flex;
-  justify-content: space-around;
 }
 
-
-#mas,
-#menos,
 #subtotal {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: left; /* Centra horizontalmente el contenido */
+  justify-content: flex-end; /* Alinea el contenido a la derecha */
 }
 
-#mas div,
-#menos div,
-#subtotal div {
-  display: flex;
-  align-items: center;
-}
-
-#mas h2,
-#menos h2,
-#subtotal h2 {
-  margin-right: 10px;
-}
-
-.sangria {
-  padding-left: 180px; /* Sangría de 20px a la izquierda*/
-}
-
-.sangria-mas-y-menos {
-  padding-left: 130px; /* Sangría de 20px a la izquierda*/
-}
-
-.sangria-input-deposito {
-  padding-left: 110px; /* Sangría de 20px a la izquierda*/
-}
-
-.sangria-input-cheque-anu {
-  padding-left: 18px; /* Sangría de 20px a la izquierda*/
-}
-
-.sangria-input-ajuste {
-  padding-left: 130px; /* Sangría de 20px a la izquierda*/
-}
-
-.sangria-input-nota-debito {
-  padding-left: 35px; /* Sangría de 20px a la izquierda*/
+/* Aquí va la clase CSS para el div */
+.div-3x6 {
+display: grid;
+grid-template-rows: repeat(6, 1fr);
+grid-template-columns: repeat(3, 1fr);
+gap: 10px; /* Espacio entre las celdas */
 }
 
 /* Línea divisora */
@@ -154,3 +126,21 @@
   padding-bottom: 30px;
 }
 
+#banco-2,
+#banco-3,
+#banco-4 {
+  padding-left: 100px; /* Ajusta el valor según la cantidad de sangría que desees */
+}
+
+#libro-2,
+#libro-6 {
+  padding-left: 50px; /* Ajusta el valor según la cantidad de sangría que desees */
+}
+
+#libro-3,
+#libro-4,
+#libro-5,
+#libro-7,
+#libro-8 {
+  padding-left: 100px; /* Ajusta el valor según la cantidad de sangría que desees */
+}

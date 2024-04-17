@@ -13,7 +13,12 @@
 <form id="FRAnulacion" name="FRAnulacion" method="post">
   
 <div id="titulo">
-  <h1>Anulación de Cheques</h1>
+
+    <div id="anulacionChequesTitulo">
+        <div id="anulacionCheques">
+          <h1>Anulación de Cheques</h1>
+        </div>
+    </div>
 
 
     <div class="contenedor-cheques">

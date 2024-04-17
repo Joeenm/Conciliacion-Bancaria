@@ -30,123 +30,98 @@
         </div>
 
         <div class="contenedor-boton">
-          <button class="botones">Realizar Conciliación</button>
+          <div class="primer-boton"><button class="botones">Realizar Conciliación</button></div>
         </div>
     </div>
 
     <!-- Línea divisora -->
     <div class="div-con-linea"></div>
 
-    <div id="saldo-libro">
-       <div id="libro-1">
-        <h2>SALDO SEGÚN LIBRO AL: </h2>
-        <input type="text">
-       </div>
-    </div>
-
-    <div id="libro-2">
-      <div id="mas">
-        <div class="sangria-mas-y-menos" id="deposito">
-            <div><h2>Más: Depósito</h2></div>
-            <div class="sangria-input-deposito"><input type="text"></div>
-        </div>
-
-        <div class="sangria" id="cheques-anu">
-            <div><h2>Cheques Anulados</h2></div>
-            <div class="sangria-input-cheque-anu"><input type="text"></div>
-        </div>
-
-        <div class="sangria" id="ajustes">
-            <div><h2>Ajustes</h2></div>
-            <div class="sangria-input-ajuste"><input type="text"></div>
-        </div>
-      </div>
-
-      <div id="subtotal">
-        <div id="subtotal-mas">
-          <div><h2>Subtotal de +</h2></div>
-          <div><input type="text"></div>
-        </div>
-
-        <div id="subtotal-1">
-          <div><h2>SUBTOTAL</h2></div>
-          <div><input type="text"></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="libro-3">
-      <div id="menos">
-          <div class="sangria-mas-y-menos" id="">
-              <div><h2>Menos: Cheques girados <br>en el mes</h2></div>
-              <div class=""><input type="text"></div>
-          </div>
-
-          <div class="sangria" id="">
-              <div><h2>Notas de Débitos</h2></div>
-              <div class="sangria-input-nota-debito"><input type="text"></div>
-          </div>
-
-          <div class="sangria" id="ajustes">
-              <div><h2>Ajustes</h2></div>
-              <div class="sangria-input-ajuste"><input type="text"></div>
-          </div>
-      </div>
-
-      <div id="subtotal">
-        <div id="subtotal-menos">
-          <div><h2>Subtotal de -</h2></div>
-          <div><input type="text"></div>
-        </div>
-      </div>
-    </div>
-
-
-    <div id="saldo-libro-final">
-      <div id="libro-1">
-        <h2>SALDO CONCILIADO SEGÚN LIBROS AL: </h2>
-        <input type="text">
-      </div>
-    </div>
-
-    <!-- Línea divisora -->
-    <div class="div-con-linea"></div>
-
-    <div id="saldo-banco">
-      <div id="banco-1">
-        <div><h2>SALDO EN BANCO AL: </h2></div>
+    <div class="div-3x6">
+        <!-- Primera fila -->
+        <div id="libro-1"><h2>SALDO SEGÚN LIBRO AL: </h2></div>
+        <div></div>
         <div><input type="text"></div>
-      </div>
+        <div id= libro-2><h2>Más: Depósito</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+    
+        <!-- Segunda fila -->
+        <div id="libro-3"><h2>Cheques Anulados</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+        <div id="libro-4"><h2>Notas de Crédito</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+    
+        <!-- Tercera fila -->
+        <div id="libro-5"><h2>Ajustes</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
 
-      <div id= banco-2>
-        <div id="mas-depositos">
-          <div><h2>Más: Depósitos en Tránsito</h2></div>
-          <div><input type="text"></div>
-        </div>
+        <!-- Cuarta Fila -->
+        <div></div>
+        <div id="subtotal"><h2>Subtotal</h2></div>
+        <div><input type="text"></div>
+        <div id="primer-subtotal"><h2>SUBTOTAL</h2></div>
+        <div></div>
+        <div><input type="text"></div>
 
-        <div id="menos-cheques">
-          <div><h2>Menos: Cheques en Circulción</h2></div>
-          <div><input type="text"></div>
-        </div>
+        <!-- Quinta Fila -->
+        <div id= libro-6><h2>Menos: Cheques girados en el mes</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+        <div id="libro-7"><h2>Notas de Débitos</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
 
-        <div id="mas-ajustes">
-          <div><h2>Más: Ajustes</h2></div>
-          <div><input type="text"></div>
-        </div>
-      </div>
+        <!-- Sexta Fila -->
+        <div id="libro-8"><h2>Ajustes</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
 
-      <div id="subtotal-final">
-        <div id="subtotal-menos">
-          <div><h2>Subtotal</h2></div>
-          <div class="espacio"><input type="text"></div>
-        </div>
-      </div>
+        <!-- Séptima fila -->
+        <div></div>
+        <div id="subtotal"><h2>Subtotal</h2></div>
+        <div><input type="text"></div>
+        <div id="saldo-libro-final"><h2>SALDO CONCILIADO SEGÚN LIBROS AL: </h2></div>
+        <div></div>
+        <div><input type="text"></div>
     </div>
 
     <!-- Línea divisora -->
     <div class="div-con-linea"></div>
+<!-- /////////////////////////////////////////////////////// -->
+    <div class="div-3x6">
+        <!-- Primera fila -->
+        <div id="banco-1"><h2>SALDO EN BANCO AL: </h2></div>
+        <div></div>
+        <div><input type="text"></div>
+        <div id= banco-2><h2>Más: Depósitos en Tránsito</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+    
+        <!-- Segunda fila -->
+        <div id="banco-3"><h2>Menos: Cheques en Circulación</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+        <div id="banco-4"><h2>Más: Ajustes</h2></div>
+        <div id="subtotal"><input type="text" class="input-derecha"></div>
+        <div></div>
+    
+        <!-- Tercera fila -->
+        <div></div>
+        <div id="subtotal"><h2>Subtotal</h2></div>
+        <div><input type="text"></div>
+        <div id="saldo-banco-final"><h2>SALDO CONCILIADO IGUAL A BANCO AL: </h2></div>
+        <div></div>
+        <div><input type="text"></div>
+    </div>
+<!-- /////////////////////////////////////////////////////// -->
+    <!-- Línea divisora -->
+    <div class="div-con-linea"></div>
 
-    <div class="contenedor-boton">
+    <div class="contenedor-botones">
       <button class="botones">Grabar</button>
       <button class="botones">Nuevo</button>
     </div>

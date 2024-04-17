@@ -10,9 +10,23 @@
   justify-content: space-between;
 }
 
-#titulo h1 {
-  color: #ffffff;
-  font-size: 20px;
+#anulacionChequesTitulo {
+  padding-bottom: 10px;
+}
+
+#anulacionCheques h1{
+  color: #333;
+  font-size: 25px;
+  margin: 0;
+}
+
+#anulacionCheques{
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: left;
+  flex-grow: 1;
+  margin-right: 10px;
 }
 
 #Detalle-cheques, #ck1, #contenido-Detalle-Anulación{
@@ -81,7 +95,7 @@
 }
 #og-1 input[type="text"]{
   width: 100%;
-  margin-bottom: 160px;
+  margin-bottom: 15px;
   height:100px ;
   box-sizing: border-box;
 }

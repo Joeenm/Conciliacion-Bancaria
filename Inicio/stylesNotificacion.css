@@ -1,0 +1,40 @@
+.toast {
+    position: fixed;
+    top: 130px;
+    right: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none; /* Por defecto oculto */
+    z-index: 9999; /* Asegura que esté arriba de otros elementos */
+  }
+
+  .toast-icon {
+    margin-right: 10px; /* Espacio entre el icono y el mensaje */
+    font-size: 1.5rem; /* Tamaño del icono */
+  }
+  
+  .toast.show {
+    display: block; /* Mostrar cuando tiene la clase 'show' */
+    animation: slideIn 0.5s ease forwards, fadeOut 0.5s ease 3s forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  

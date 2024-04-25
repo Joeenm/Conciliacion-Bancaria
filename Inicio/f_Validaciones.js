@@ -46,31 +46,6 @@ function actualizarMonto() {
     document.getElementById("monto-1").value = valorSuma;
 }
 
-// Alerta de confirmación
-/*document.addEventListener("DOMContentLoaded", function() {
-    const botonGuardar = document.querySelector(".boton");
-  
-    botonGuardar.addEventListener("click",function() {
-      const campos = document.querySelectorAll("input[type='text'], input[type='date'], select");
-      let camposVacios = false;
-  
-      campos.forEach(function(campo) {
-        if (campo.value.trim() === "") { // Verifica que el campo no esté vacío
-          camposVacios = true;
-          return;
-
-        }
-      });
-  
-      if (camposVacios) {
-        alert("Por favor completar todos los campos.");
-      } else {
-        // Aquí puedes agregar la lógica para guardar los datos
-        console.log("Todos los campos están llenos. Guardando datos...");
-      }
-    });
-  });
-*/
     // Definir una función estática para el AJAX
     function BusquedaCK() {
       var numeroCheque = $("#numero_cheque").val();
@@ -122,7 +97,7 @@ function actualizarMonto() {
     });
     
     if (camposVacios) {
-      alert("Por favor, complete todos los campos.");
+      mostrarToast("Por favor, complete todos los campos.");
       return; // Detener la ejecución si hay campos vacíos
     }
 
@@ -130,18 +105,21 @@ function actualizarMonto() {
       type: "POST",
       url: "c_EnviCKS.php",
       data: $("#FormularioCks").serialize(),
-        success: function(resp){
-          if(resp=='0'){
-            } else {
-            // Aquí deberías manejar el caso en que la respuesta no sea '0'
-          console.log("La respuesta no es '0':", resp);
-          alert("El cheque se guardó correctamente.");
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+      dataType: 'json', // Esperamos recibir datos en formato JSON
+      success: function(response) {
+          if (response.success) {
+              // El servidor devuelve éxito al guardar el cheque
+              mostrarToast("El cheque se guardó correctamente.");
+          } else {
+              console.log("Respuesta inesperada del servidor:", response);
+              mostrarToast("Cheque ya existe.");
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
           console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
-        }
-    })
+          mostrarToast("Error al conectar con el servidor. Intente de nuevo más tarde.");
+      }
+  });
       $("#input-numero-cheque").val('');
       $("#fecha").val('');
       $("#p-orden-a").val('');
@@ -151,6 +129,40 @@ function actualizarMonto() {
       $("#objeto-1").val('');
       $("#monto-1").val('');
   }
+
+  function validarNumeroCheque(event) {
+    event.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: "c_validarNumCheque.php",
+        data: $("#FormularioCks").serialize(),
+        dataType: 'json', // Esperamos recibir datos en formato JSON
+        success: function (response) {
+            if (response.error) {
+                console.log("Respuesta inesperada del servidor:", response);
+                mostrarToast(response.error);
+
+                // Deshabilitar los demás campos del formulario
+                deshabilitarCampos();
+            } else if (response.success) {
+                console.log("Número de cheque nuevo:", response);
+                mostrarToast(response.success);
+
+                // Habilitar los demás campos del formulario
+                habilitarCampos();
+            }
+        },
+    });
+}
+
+function deshabilitarCampos() {
+    $("#FormularioCks input[type='text']").not("#input-numero-cheque").prop('disabled', true);
+}
+
+function habilitarCampos() {
+    $("#FormularioCks input[type='text']").not("#input-numero-cheque").prop('disabled', false);
+}
 
 function Anular(event){
   event.preventDefault();
@@ -227,4 +239,19 @@ function OTransacciones(event){
   $("#Fecha").val('');
   $("#transaccion").val('');
   $("#Monto").val('');
+}
+
+function mostrarToast(mensaje) {
+  var toast = document.getElementById('toast-notification');
+  var toastMessage = toast.querySelector('.toast-message');
+  var toastIcon = toast.querySelector('.toast-icon');
+  
+  toastMessage.textContent = mensaje;
+  toastIcon.innerHTML = 'ℹ️'; // Icono de información
+
+  toast.classList.add('show'); // Mostrar la notificación
+
+  setTimeout(function() {
+    toast.classList.remove('show'); // Quitar la clase después de 3 segundos
+  }, 3000); // 3000 milisegundos = 3 segundos
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creación de Cheques</title>
     <link rel="stylesheet" href="stylesCheques.css">
+    <link rel="stylesheet" href="stylesNotificacion.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="f_Validaciones.js"></script>
 </head>
@@ -28,10 +29,10 @@
     <div class="contenedor-cheques">
         <div id="contenido-cheques">
           <div id="ck1">
-            <div id="numero-cheque">
-                <h4>No. de Cheque</h4>
-                <input type="text" id="input-numero-cheque" name="input-numero-cheque" onkeypress="return SoloNumeros(event)">
-            </div>
+          <div id="numero-cheque">
+              <h4>No. de Cheque</h4>
+              <input type="text" id="input-numero-cheque" name="input-numero-cheque" onkeypress="return SoloNumeros(event)" onblur="validarNumeroCheque(event)">
+          </div>
             
             <div id="fecha">
                 <h4>Fecha</h4>
@@ -110,6 +111,11 @@
             </div>
           </div>      
 
+    </div>
+
+    <div id="toast-notification" class="toast">
+      <span class="toast-icon">ℹ️</span>
+      <span class="toast-message"></span>
     </div>
 
     <div class="contenedor-botones">

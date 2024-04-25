@@ -149,14 +149,3 @@ option {
 .boton:hover {
   background-color: #007acc; /* Cambia el color de fondo al pasar el cursor */
 }
-
-/* Estilos para alerta */
-.alerta {
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #f00;
-  border-radius: 5px;
-  background-color: #ffecec;
-  color: #f00;
-  font-weight: bold;
-}

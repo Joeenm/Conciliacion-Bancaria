@@ -255,3 +255,47 @@ function mostrarToast(mensaje) {
     toast.classList.remove('show'); // Quitar la clase después de 3 segundos
   }, 3000); // 3000 milisegundos = 3 segundos
 }
+
+function MostrarConciliacion(){
+  var NumeroMes = $("#Selectmes").val();
+  var NumeroAge = $("#age").val();
+      console.log("Evento de clic del botón ejecutado correctamente.");
+      console.log("Número de mes enviado desde el ajax(esto es el archivo js): " + NumeroMes)
+      console.log("Número de año enviado desde el ajax(esto es el archivo js): " + NumeroAge)
+      $.ajax({
+          url: "c_Conciliacion.php", 
+          type: "POST", 
+          data: { Selectmes: NumeroMes, age: NumeroAge },
+          success: function(data) {
+            try{
+              //data = JSON.parse(data);
+              console.log("Datos recibidos del servidor: ", data);
+              $("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL " + data.Libro_Pasado);
+              $("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL " + data.LibroActual);
+              $("#LibroActual1").text("SALDO EN BANCO AL " + data.LibroActual);
+              $("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL " + data.LibroActual);
+              $("#libro_1").val(data.saldo_anterior);
+              $("#Depósito").val(data.masdepositos);
+              $("#Cheques-Anulados").val(data.maschequesanulados);
+              $("#Notas-de-Crédito").val(data.masnotascredito);
+              $("#Ajustes").val(data.masajusteslibro);
+              $("#Subtotal").val(data.sub1);
+              $("#SUB_TOTAL").val(data.subtotal1);
+              $("#Cheques-girados").val(data.menoschequesgirados);
+              $("#Notas-Débitos").val(data.menosnotasdebito);
+              $("#Ajustes2").val(data.menosajusteslibro);
+              $("#Subtotal2").val(data.sub2);
+              $("#SALDO_CONCILIADO").val(data.saldolibros);
+              //$("#SALDO_BANCO").val(data.saldobanco);
+              $("#Depósitos-Tránsito").val(data.masdepositostransito);
+              $("#Cheques_en_Circulación").val(data.menoschequescirculacion);
+              $("#Ajustes3").val(data.masajustesbanco);
+              $("#Subtotal3").val(data.sub3);
+              $("#SALDO-CONCILIADO-IGUAL-A").val(data.saldo_conciliado);
+            }catch (error) {
+              console.error("Error al analizar la respuesta JSON:", error);
+              // Si hay un error al analizar la respuesta, no hacemos nada
+          }
+          },
+        })
+}

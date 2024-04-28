@@ -11,14 +11,14 @@ function HacerLogin(){
         global $conecction;
         $userName = trim($_POST['userName']);
         $Clave = trim($_POST['Clave']);
-        $sql= "SELECT * FROM usuarios WHERE Usuario = '$userName' and Contraseña = '$Clave' ";
+        $sql= "SELECT * FROM usuario WHERE cedula = '$userName' and password = '$Clave' ";
         $result = $conecction->query($sql);
         
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc(); // Obtener el primer registro
             $response = array(
-                'usuario' => $row['Usuario'],
-                'contra' => $row['Contraseña'],
+                'usuario' => $row['cedula'],
+                'contra' => $row['password'],
             );
             echo json_encode($response);
         } else {

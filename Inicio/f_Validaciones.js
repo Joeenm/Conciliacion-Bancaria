@@ -38,6 +38,86 @@ function SoloDinero(evento) {
     }
 }
 
+// Convertir números a cantidad en letras
+function convertirNumeroALetras() {
+  // Obtener el valor del campo de entrada
+  let numero = document.getElementById('suma-de').value.trim();
+
+  // Verificar si el valor es un número válido
+  if (!isNaN(numero) && numero != '') {
+      // Convertir el número a letras
+      let resultado = convertirNumeroALetrasTexto(numero);
+
+      // Mostrar el resultado en el campo de texto de salida
+      document.getElementById('suma').value = resultado;
+  } else {
+      // Si el valor ingresado no es un número válido, limpiar el campo de salida
+      document.getElementById('suma').value = '';
+  }
+}
+
+function convertirNumeroALetrasTexto(numero) {
+  // Array con los nombres de los números
+  let unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+  let decenas = ['', 'diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+  let centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+  // Convertir la parte entera a letras
+  let parteEntera = '';
+
+  if (numero.includes('.')) {
+      let partes = numero.split('.');
+      parteEntera = convertirParteEnteraALetras(partes[0]);
+      parteEntera += ' con ' + convertirParteDecimalALetras(partes[1]);
+  } else {
+      parteEntera = convertirParteEnteraALetras(numero);
+  }
+
+  return parteEntera;
+}
+
+function convertirParteEnteraALetras(numero) {
+  // Convertir la parte entera a letras
+  let resultado = '';
+  let unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+  let decenas = ['', 'diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+  let centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+  if (numero.length == 1) {
+      resultado = unidades[numero];
+  } else if (numero.length == 2) {
+      if (numero[0] == '1') {
+          resultado = decenas[numero[1]];
+      } else {
+          resultado = decenas[numero[0]] + ' ' + unidades[numero[1]];
+      }
+  } else if (numero.length == 3) {
+      resultado = centenas[numero[0]] + ' ' + (numero.slice(1) == '00' ? '' : convertirParteEnteraALetras(numero.slice(1)));
+  } else if (numero.length > 3 && numero.length <= 6) {
+      resultado = convertirParteEnteraALetras(numero.slice(0, numero.length - 3)) + ' mil ' + convertirParteEnteraALetras(numero.slice(numero.length - 3));
+  } else if (numero.length > 6 && numero.length <= 9) {
+      resultado = convertirParteEnteraALetras(numero.slice(0, numero.length - 6)) + ' millones ' + convertirParteEnteraALetras(numero.slice(numero.length - 6));
+  }
+
+  return resultado;
+}
+
+function convertirParteDecimalALetras(numero) {
+  // Convertir la parte decimal a letras
+  let resultado = '';
+  let unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+  let decenas = ['', 'diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+
+  if (numero.length == 1) {
+      resultado = numero + '/10';
+  } else if (numero.length == 2) {
+      resultado = numero + '/100';
+  }
+
+  return resultado;
+}
+
+// Función para pasar monto en Suma-de a Monto-1 en Pantalla Cheques
 function actualizarMonto() {
     // Obtener el valor ingresado en el primer input
     var valorSuma = document.getElementById("suma-de").value;
@@ -46,44 +126,68 @@ function actualizarMonto() {
     document.getElementById("monto-1").value = valorSuma;
 }
 
-    // Definir una función estática para el AJAX
+    // Función para buscar número de cheque en Pantallas Anulación y Sacar de Circulación
     function BusquedaCK() {
       var numeroCheque = $("#numero_cheque").val();
       console.log("Evento de clic del botón ejecutado correctamente.");
       console.log("Número de Cheque enviado desde el ajax(esto es el archivo js): " + numeroCheque)
       $.ajax({
-          url: "c_BusquedaCampos.php", 
-          type: "POST", 
-          data: { numero_cheque: numeroCheque },
-          success: function(data) {
-              try {
-                  data = JSON.parse(data);
-                  console.log("Datos recibidos del servidor: ", data);
-                  
-                  // Actualizar los campos del formulario si la respuesta es válida
-                  $("#fecha").val(data.fecha);
-                  if (data.beneficiario !== null && data.beneficiario !== '00000') {
-                      $("#p-orden-a").val(data.beneficiario);
-                  } else {
-                      $("#p-orden-a").val("");
-                  }
-                  $("#monto").val(data.monto);
-                  $("#descripcion").val(data.descripcion);
-              } catch (error) {
-                  console.error("Error al analizar la respuesta JSON:", error);
-                  // Si hay un error al analizar la respuesta, no hacemos nada
-              }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-              console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
-              // Si hay un error en la solicitud AJAX, no hacemos nada
-          }
-      });
+        url: "c_BusquedaCampos.php", 
+        type: "POST", 
+        data: { numero_cheque: numeroCheque },
+        success: function(data) {
+            try {
+                data = JSON.parse(data);
+                console.log("Datos recibidos del servidor: ", data);
+                
+                if ('success' in data) {
+                    mostrarToast(data.success); // Mostrar mensaje de éxito
+                    // Actualizar los campos del formulario si la respuesta es válida
+                    $("#fecha").val(data.data.fecha);
+                    if (data.data.beneficiario !== null && data.data.beneficiario !== '00000') {
+                        $("#p-orden-a").val(data.data.beneficiario);
+                    } else {
+                        $("#p-orden-a").val("");
+                    }
+                    $("#monto").val(data.data.monto);
+                    $("#descripcion").val(data.data.descripcion);
+                } else if ('error' in data) {
+                    mostrarToast(data.error); // Mostrar mensaje de error
+                    // Limpiar los campos del formulario
+                    $("#fecha").val("");
+                    $("#p-orden-a").val("");
+                    $("#monto").val("");
+                    $("#descripcion").val("");
+                } else {
+                    console.error("Respuesta inesperada del servidor:", data);
+                }
+            } catch (error) {
+                console.error("Error al analizar la respuesta JSON:", error);
+                // Si hay un error al analizar la respuesta, mostramos un mensaje genérico
+                mostrarToast("Error al procesar la respuesta del servidor");
+                // Limpiar los campos del formulario
+                $("#fecha").val("");
+                $("#p-orden-a").val("");
+                $("#monto").val("");
+                $("#descripcion").val("");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+            // Si hay un error en la solicitud AJAX, mostramos un mensaje genérico
+            mostrarToast("Error en la solicitud AJAX");
+            // Limpiar los campos del formulario
+            $("#fecha").val("");
+            $("#p-orden-a").val("");
+            $("#monto").val("");
+            $("#descripcion").val("");
+        }
+    });
   }
 
   // Prueba de Campos vacios = No envia
   // Prueba de Campos completos = Guardar Exitoso
-  // Falta prueba de Cheque existente
+  // Prueba de Cheque existente
   function GrabaraCKs(event){
     event.preventDefault();
 
@@ -130,6 +234,7 @@ function actualizarMonto() {
       $("#monto-1").val('');
   }
 
+  // Validar número de cheque existente y mostrar notificación en Pantalla Cheques
   function validarNumeroCheque(event) {
     event.preventDefault();
 
@@ -154,8 +259,9 @@ function actualizarMonto() {
             }
         },
     });
-}
+  }
 
+// Funciones para Habilitar y Deshabilitar campos en Pantalla Cheques
 function deshabilitarCampos() {
     $("#FormularioCks input[type='text']").not("#input-numero-cheque").prop('disabled', true);
 }
@@ -164,83 +270,114 @@ function habilitarCampos() {
     $("#FormularioCks input[type='text']").not("#input-numero-cheque").prop('disabled', false);
 }
 
-function Anular(event){
+// Función para botón en Anulación
+function Anular(event) {
   event.preventDefault();
   $.ajax({
-    type :"POST",
+    type: "POST",
     url: "c_AnularUpDate.php",
     data: $("#FRAnulacion").serialize(),
-    success: function(resp){
-        if(resp=='0'){
-          } else {
-          // Aquí deberías manejar el caso en que la respuesta no sea '0'
-        console.log("La respuesta no es '0':");
-          }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
-      }
-  })
-  $("#numero_cheque").val('');
-  $("#fecha").val('');
-  $("#monto").val('');
-  $("#p-orden-a").val('');  
-  $("#descripcion").val('');
-  $("#objeto-1").val('');
-  $("#Objeto-2").val('');
-
-}
-
-function Circulacion(event){
-  event.preventDefault();
-  $.ajax({
-    type :"POST",
-    url: "c_CirculacionUpDate.php",
-    data: $("#FRCirculacion").serialize(),
-    success: function(resp){
-        if(resp=='0'){
-          } else {
-          // Aquí deberías manejar el caso en que la respuesta no sea '0'
-        console.log("La respuesta no es '0':");
-          }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
-      }
-  })
-  $("#numero_cheque").val('');
-  $("#fecha").val('');
-  $("#monto").val('');
-  $("#p-orden-a").val('');  
-  $("#descripcion").val('');
-  $("#objeto-1").val('');
-
-}
-
-function OTransacciones(event){
-  event.preventDefault();
-  $.ajax({
-    type :"POST",
-    url: "c_OTGrabar.php",
-    data: $("#FROtrasT").serialize(),
-    success: function(resp){
-      console.log(resp);
-        if(resp=='0'){
-          } else {
-          // Aquí deberías manejar el caso en que la respuesta no sea '0'
-        console.log("La respuesta no es '0':");
+    success: function(resp) {
+      try {
+        data = JSON.parse(resp);
+        console.log("Datos recibidos del servidor:", data);
         
+        if ('success' in data) {
+          mostrarToast(data.success); // Mostrar mensaje de éxito
+          // Limpiar los campos del formulario después de la solicitud AJAX
+          $("#FRAnulacion")[0].reset();
+        } else if ('error' in data) {
+          mostrarToast(data.error); // Mostrar mensaje de error
+        } else {
+          console.error("Respuesta inesperada del servidor:", data);
+        }
+      } catch (error) {
+        console.error("Error al analizar la respuesta JSON:", error);
+        // Si hay un error al analizar la respuesta, mostramos un mensaje genérico
+        mostrarToast("Error al procesar la respuesta del servidor");
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+      // Si hay un error en la solicitud AJAX, mostramos un mensaje genérico
+      mostrarToast("Error en la solicitud AJAX");
+    }
+  });
+}
+
+// Función para botón en Sacar de Circulación
+function Circulacion(event) {
+    event.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "c_CirculacionUpDate.php",
+        data: $("#FRCirculacion").serialize(),
+        success: function(resp) {
+            try {
+                data = JSON.parse(resp);
+                console.log("Datos recibidos del servidor:", data);
+                
+                if ('success' in data) {
+                    mostrarToast(data.success); // Mostrar mensaje de éxito
+                    // Limpiar los campos del formulario después de la solicitud AJAX
+                    $("#FRCirculacion")[0].reset();
+                } else if ('error' in data) {
+                    mostrarToast(data.error); // Mostrar mensaje de error
+                } else {
+                    console.error("Respuesta inesperada del servidor:", data);
+                }
+            } catch (error) {
+                console.error("Error al analizar la respuesta JSON:", error);
+                // Si hay un error al analizar la respuesta, mostramos un mensaje genérico
+                mostrarToast("Error al procesar la respuesta del servidor");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+            // Si hay un error en la solicitud AJAX, mostramos un mensaje genérico
+            mostrarToast("Error en la solicitud AJAX");
+        }
+    });
+}
+
+// Función para botón en Otras Transacciones
+function OTransacciones(event) {
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "c_OTGrabar.php",
+      data: $("#FROtrasT").serialize(),
+      success: function(resp) {
+        try {
+          data = JSON.parse(resp);
+          console.log("Datos recibidos del servidor:", data);
+          
+          if ('success' in data) {
+            mostrarToast(data.success); // Mostrar mensaje de éxito
+            // Limpiar los campos del formulario después de la solicitud AJAX
+            $("#Fecha").val('');
+            $("#transaccion").val('');
+            $("#Monto").val('');
+          } else if ('error' in data) {
+            mostrarToast(data.error); // Mostrar mensaje de error
+          } else {
+            console.error("Respuesta inesperada del servidor:", data);
           }
+        } catch (error) {
+          console.error("Error al analizar la respuesta JSON:", error);
+          // Si hay un error al analizar la respuesta, mostramos un mensaje genérico
+          mostrarToast("Error al procesar la respuesta del servidor");
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+        // Si hay un error en la solicitud AJAX, mostramos un mensaje genérico
+        mostrarToast("Error en la solicitud AJAX");
       }
-  })
-  $("#Fecha").val('');
-  $("#transaccion").val('');
-  $("#Monto").val('');
-}
+    });
+  }
 
+// Función para Notificaciones
 function mostrarToast(mensaje) {
   var toast = document.getElementById('toast-notification');
   var toastMessage = toast.querySelector('.toast-message');

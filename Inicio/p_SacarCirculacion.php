@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sacar Cheques de Circulación</title>
     <link rel="stylesheet" href="stylesSacarCirculacion.css">
+    <link rel="stylesheet" href="stylesNotificacion.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="f_Validaciones.js"></script>
 </head>
@@ -67,7 +68,11 @@
               <button class="boton" onclick="Circulacion(event)">Sacar de Circulación</button>
             </div>
           </div>
+        </div>
 
+        <div id="toast-notification" class="toast">
+          <span class="toast-icon">ℹ️</span>
+          <span class="toast-message"></span>
         </div>
 
     </div>

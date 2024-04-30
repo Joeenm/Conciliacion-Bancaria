@@ -60,8 +60,8 @@
               ?>
             </select>
             <h4>La suma de</h4>
-            <input type="text" id="suma-de" name="suma-de" onkeyup="actualizarMonto()" onkeypress="return SoloDinero(event)">
-            <input type="text" id="suma" name="suma" placeholder="Cantidad en letras" onkeypress="return SoloLetras(event)">
+            <input type="text" id="suma-de" name="suma-de" onkeyup="actualizarMonto(); convertirNumeroALetras()" onkeypress="return SoloDinero(event)">
+            <input type="text" id="suma" name="suma" placeholder="Cantidad en letras" readonly>
           </div>
 
           <div id="ck3">

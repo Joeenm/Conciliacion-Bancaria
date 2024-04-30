@@ -36,6 +36,11 @@
         <div class="action-buttons">
           <button type="button" class="primary-button" onclick="Entrar(event)" >Ingresar</button>
         </div>
+
+        <div id="toast-notification" class="toast">
+          <span class="toast-icon">ℹ️</span>
+          <span class="toast-message"></span>
+        </div>
         
       </div>
     </div>

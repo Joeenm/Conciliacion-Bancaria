@@ -17,7 +17,7 @@ function mostrarAnulación(){
       $numero_cheque = $conn->real_escape_string($numero_cheque);
       
       // Consultar la base de datos para obtener la información del cheque
-      $sql = "SELECT * FROM cheques WHERE numero_cheque = '$numero_cheque'";
+      $sql = "SELECT * FROM cheques WHERE numero_cheque = '$numero_cheque' ";
       $result = $conn->query($sql);
       
       if ($result->num_rows > 0) {

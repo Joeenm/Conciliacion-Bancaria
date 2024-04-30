@@ -13,3 +13,4 @@ echo json_encode('Se entro en el php.');
   echo json_encode(array('aqui funciona?'));
   echo json_encode('la insercion fue exitosa.');
 ?>
+

@@ -9,8 +9,11 @@ $age_Actual=Date('Y');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conciliación Bancaria</title>
     <link rel="stylesheet" href="stylesConciliacion.css">
+    <link rel="stylesheet" href="stylesNotificacion.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="f_Validaciones.js"></script>
+    <script defer src="f_Validaciones.js">
+        
+    </script>
 </head>
 <body>
 <form id="FRConciliacion" name="FRConciliacion" method="post">
@@ -74,6 +77,13 @@ $age_Actual=Date('Y');
         <!-- Primera fila -->
         <div id="libro-1">
             <h2 id="Libro_Pasado" name= "Libro_Pasado">SALDO SEGÚN LIBRO AL </h2>
+            <!-- Input ocultos para facilitar en envio del formulario -->
+            <input type="hidden" id="Dia-Anterior_oculto" name="Dia-Anterior_oculto">
+            <input type="hidden" id="Mes-Anterior_oculto" name="Mes-Anterior_oculto">
+            <input type="hidden" id="Año-Anterior_oculto" name="Año-Anterior_oculto">
+            <input type="hidden" id="Dia-Actual_oculto" name="Dia-Actual_oculto">
+            <input type="hidden" id="Mes-Actual_oculto" name="Mes-Actual_oculto">
+            <input type="hidden" id="Año-Actual_oculto" name="Año-Actual_oculto">
         </div>
         <div></div>
         <div>
@@ -148,7 +158,7 @@ $age_Actual=Date('Y');
         <div id="banco-1"><h2 id ="LibroActual1" name="LibroActual1">SALDO EN BANCO AL  </h2></div>
         <div></div>
         <div>
-            <input id="SALDO_BANCO" name="SALDO_BANCO" type="text" ></div>
+            <input id="SALDO_BANCO" name="SALDO_BANCO" type="text" onkeypress="return SoloDinero(event) && SumaConciliacion(event);" disabled  ></div>
         <div id= banco-2><h2>Más: Depósitos en Tránsito</h2></div>
         <div id="subtotal">
             <input id="Depósitos-Tránsito" name="Depósitos-Tránsito" type="text" class="input-derecha" readonly></div>
@@ -172,15 +182,21 @@ $age_Actual=Date('Y');
         <div id="saldo-banco-final"><h2 id ="LibroActual2" name="LibroActual2">SALDO CONCILIADO IGUAL A BANCO AL </h2></div>
         <div></div>
         <div>
-            <input id="SALDO-CONCILIADO-IGUAL-A" name="SALDO-CONCILIADO-IGUAL-A" type="text" readonly></div>
+            <input id="SaldoT" name="SaldoT" type="text" readonly></div>
     </div>
 <!-- /////////////////////////////////////////////////////// -->
     <!-- Línea divisora -->
     <div class="div-con-linea"></div>
+    
+    
+    <div id="toast-notification" class="toast">
+      <span class="toast-icon">ℹ️</span>
+      <span class="toast-message"></span>
+    </div>
 
     <div class="contenedor-botones">
-      <button class="botones">Grabar</button>
-      <button class="botones">Nuevo</button>
+      <button type ="button" class="botones" onclick="GrabarConciliacion (event) ">Grabar</button>
+      <button type ="button" class="botones">Nuevo</button>
     </div>
     
   
@@ -189,3 +205,5 @@ $age_Actual=Date('Y');
 </form>
 </body>
 </html>
+
+

@@ -43,7 +43,7 @@ function MostrarConciliacion(){
                 // El año del mes anterior es el mismo que el año seleccionado
                 $AgnoA = $C_agno;
             }
-            $sqlMesAnterior= "SELECT * FROM meses WHERE mes = '$MesA' ";
+            $sqlMesAnterior= "SELECT * FROM meses WHERE mes = '$MesA'";
             $resultMA = $conn->query($sqlMesAnterior);
             if ($resultMA->num_rows > 0) {
                 $rowA = $resultMA->fetch_assoc();
@@ -123,7 +123,7 @@ function MostrarConciliacion(){
                 // Obtener datos cheques Girados/creados
                 $sql4 = "SELECT SUM(monto) AS total_Girados
                     FROM cheques 
-                    WHERE MONTH(fecha) = '$Mes' and  Year(fecha) ='$C_agno' and fecha_reintegro = '0000-00-00' and fecha_Anulado='0000-00-00' "; 
+                    WHERE MONTH(fecha) = '$Mes' and  Year(fecha) ='$C_agno' and fecha_reintegro = '0000-00-00' and fecha_Anulado='0000-00-00' and fecha_circulacion = '0000-00-00' "; 
                 $resultado3 = $conn->query($sql4);
                 if ($resultado3) {
                     $Girados = $resultado3->fetch_assoc();
@@ -138,7 +138,7 @@ function MostrarConciliacion(){
                 //obtener los datos de cheques en circulacion
                 $sql5 = "SELECT SUM(monto) AS total_Circulacion
                 FROM cheques 
-                WHERE MONTH(fecha) = '$Mes' AND YEAR(fecha) ='$C_agno' AND fecha_reintegro = '0000-00-00' AND fecha_Anulado = '0000-00-00' AND fecha_circulacion != '0000-00-00'";
+                WHERE MONTH(fecha) = '$Mes' AND YEAR(fecha) ='$C_agno' AND fecha_reintegro = '0000-00-00' AND fecha_Anulado = '0000-00-00' AND fecha_circulacion = '0000-00-00'";
                 $resultado4 = $conn->query($sql5);
                 if ($resultado4) {
                     $Circulacion = $resultado4->fetch_assoc();
@@ -152,19 +152,24 @@ function MostrarConciliacion(){
                 
                 //operaciones de Sumas
 
-                $sub1 = $masdepositos - ($total_Anulados + $masnotascredito + $masajusteslibro);
+                $sub1 = ($masdepositos +$total_Anulados + $masnotascredito + $masajusteslibro);
                 $subtotal1 = $Saldo_Anterior + $sub1;
-                $sub2 = $total_Girados - ($menosnotasdebito + $menosajusteslibro);
+                $sub2 = ($total_Girados + $menosnotasdebito + $menosajusteslibro);
                 $saldolibros = $subtotal1 - $sub2;
-                $sub3 = ($masdepositostransito + $total_Circulacion + $masajustesbanco) * -1;
+                $sub3 = ($masdepositostransito - $total_Circulacion + $masajustesbanco) ;
 
                 $sub1 = number_format($sub1, 2, '.', '');
                 $subtotal1 = number_format($subtotal1, 2, '.', '');
                 $sub2 = number_format($sub2, 2, '.', '');
                 $saldolibros = number_format($saldolibros, 2, '.', '');
                 $sub3 = number_format($sub3, 2, '.', '');
-
                 $response = array(
+                    'DayA' => $dayA,
+                    'MesA'=> $MesA,
+                    'AgnoA'=> $AgnoA,
+                    'Dia' => $DiaActual,
+                    'Mes' => $Mes,
+                    'Agno' => $C_agno,
                     'Libro_Pasado' => $Libro_Pasado,//Si
                     'LibroActual' => $LibroActual,//si
                     'saldo_anterior'=> $Saldo_Anterior,//si

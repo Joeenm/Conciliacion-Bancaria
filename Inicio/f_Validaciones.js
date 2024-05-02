@@ -393,6 +393,7 @@ function mostrarToast(mensaje) {
   }, 3000); // 3000 milisegundos = 3 segundos
 }
 
+
 function MostrarConciliacion(){
   var NumeroMes = $("#Selectmes").val();
   var NumeroAge = $("#age").val();
@@ -407,32 +408,165 @@ function MostrarConciliacion(){
             try{
               data = JSON.parse(data);
               console.log("Datos recibidos del servidor: ", data);
-              $("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL " + data["La respuesta es"].Libro_Pasado);
-              $("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL " + data["La respuesta es"].LibroActual);
-              $("#LibroActual1").text("SALDO EN BANCO AL " + data["La respuesta es"].LibroActual);
-              $("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL " + data["La respuesta es"].LibroActual);
-              $("#libro_1").val(data["La respuesta es"].saldo_anterior);
-              $("#Depósito").val(data["La respuesta es"].masdepositos);
-              $("#Cheques-Anulados").val(data["La respuesta es"].maschequesanulados);
-              $("#Notas-de-Crédito").val(data["La respuesta es"].masnotascredito);
-              $("#Ajustes").val(data["La respuesta es"].masajusteslibro);
-              $("#Subtotal").val(data["La respuesta es"].sub1);
-              $("#SUB_TOTAL").val(data["La respuesta es"].subtotal1);
-              $("#Cheques-girados").val(data["La respuesta es"].menoschequesgirados);
-              $("#Notas-Débitos").val(data["La respuesta es"].menosnotasdebito);
-              $("#Ajustes2").val(data["La respuesta es"].menosajusteslibro);
-              $("#Subtotal2").val(data["La respuesta es"].sub2);
-              $("#SALDO_CONCILIADO").val(data["La respuesta es"].saldolibros);
-              $("#Depósitos-Tránsito").val(data["La respuesta es"].masdepositostransito);
-              $("#Cheques_en_Circulación").val(data["La respuesta es"].menoschequescirculacion);
-              $("#Ajustes3").val(data["La respuesta es"].masajustesbanco);
-              $("#Subtotal3").val(data["La respuesta es"].sub3);
-               //$("#SALDO_BANCO").val(data.saldobanco);
-              //$("#SALDO-CONCILIADO-IGUAL-A").val(data.saldo_conciliado);
+              if (data.error) {
+                var errorMessage = data.error;
+                mostrarToast(errorMessage);
+                $("#Dia-Anterior_oculto").val('');
+                $("#Mes-Anterior_oculto").val('');
+                $("#Año-Anterior_oculto").val('');
+                $("#Dia-Actual_oculto").val('');
+                $("#Mes-Actual_oculto").val('');
+                $("#Año-Actual_oculto").val('');
+                $("#libro_1").val('');
+                $("#Depósito").val('');
+                $("#Cheques-Anulados").val('');
+                $("#Notas-de-Crédito").val('');
+                $("#Ajustes").val('');
+                $("#Subtotal").val('');
+                $("#SUB_TOTAL").val('');
+                $("#Cheques-girados").val('');
+                $("#Notas-Débitos").val('');
+                $("#Ajustes2").val('');
+                $("#Subtotal2").val('');
+                $("#SALDO_CONCILIADO").val('');
+                $("#SALDO_BANCO").val('');
+                $("#Depósitos-Tránsito").val('');
+                $("#Cheques_en_Circulación").val('');
+                $("#Ajustes3").val('');
+                $("#Subtotal3").val('');
+                $("#SaldoT").val('');
+                $("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL ");
+                $("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL ");
+                $("#LibroActual1").text("SALDO EN BANCO AL ");
+                $("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL ");
+                $("#SALDO_BANCO").prop("disabled", true);
+              } else {
+                $('#Dia-Anterior_oculto').val(data["La respuesta es"].DayA);
+                $('#Mes-Anterior_oculto').val(data["La respuesta es"].MesA);
+                $('#Año-Anterior_oculto').val(data["La respuesta es"].AgnoA);
+                $('#Dia-Actual_oculto').val(data["La respuesta es"].Dia);
+                $('#Mes-Actual_oculto').val(data["La respuesta es"].Mes);
+                $('#Año-Actual_oculto').val(data["La respuesta es"].Agno);
+                $("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL " + data["La respuesta es"].Libro_Pasado);
+                $("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL " + data["La respuesta es"].LibroActual);
+                $("#LibroActual1").text("SALDO EN BANCO AL " + data["La respuesta es"].LibroActual);
+                $("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL " + data["La respuesta es"].LibroActual);
+                $("#libro_1").val(data["La respuesta es"].saldo_anterior);
+                $("#Depósito").val(data["La respuesta es"].masdepositos);
+                $("#Cheques-Anulados").val(data["La respuesta es"].maschequesanulados);
+                $("#Notas-de-Crédito").val(data["La respuesta es"].masnotascredito);
+                $("#Ajustes").val(data["La respuesta es"].masajusteslibro);
+                $("#Subtotal").val(data["La respuesta es"].sub1);
+                $("#SUB_TOTAL").val(data["La respuesta es"].subtotal1);
+                $("#Cheques-girados").val(data["La respuesta es"].menoschequesgirados);
+                $("#Notas-Débitos").val(data["La respuesta es"].menosnotasdebito);
+                $("#Ajustes2").val(data["La respuesta es"].menosajusteslibro);
+                $("#Subtotal2").val(data["La respuesta es"].sub2);
+                $("#SALDO_CONCILIADO").val(data["La respuesta es"].saldolibros);
+                $("#Depósitos-Tránsito").val(data["La respuesta es"].masdepositostransito);
+                $("#Cheques_en_Circulación").val(data["La respuesta es"].menoschequescirculacion);
+                $("#Ajustes3").val(data["La respuesta es"].masajustesbanco);
+                $("#Subtotal3").val(data["La respuesta es"].sub3);
+                //$("#SALDO_BANCO").val(data.saldobanco);
+                //$("#SALDO-CONCILIADO-IGUAL-A").val(data.saldo_conciliado);
+                $("#SALDO_BANCO").prop("disabled", false);
+              }
             }catch (error) {
               console.error("Error al analizar la respuesta JSON:", error);
               // Si hay un error al analizar la respuesta, no hacemos nada
           }
           },
         })
+}
+var typingTimer; // Temporizador para retraso de envio al server
+var doneTypingInterval = 200; // Intervalo de tiempo en milisegundos
+
+function SumaConciliacion(event) {
+    clearTimeout(typingTimer); // Reiniciar el temporizador en cada pulsación de tecla
+    typingTimer = setTimeout(function() {
+        var SaldoBanco = $("#SALDO_BANCO").val();
+        var Saldo3 = $('#Subtotal3').val();
+
+        $.ajax({
+            url: "c_ConciliacionSuma.php",
+            type: "POST",
+            data: { SALDO_BANCO: SaldoBanco, Subtotal3: Saldo3 },
+            success: function(data) {
+                try {
+                    data = JSON.parse(data);
+                    console.log("Datos recibidos del servidor: ", data);
+                    var total = parseFloat(data['La suma en total es']['Total']);
+                    $('#SaldoT').val(total);
+                } catch (error) {
+                    console.error("Error al analizar la respuesta JSON:", error);
+                }
+            },
+        });
+    }, doneTypingInterval); // Configurar un nuevo temporizador
+}
+
+
+function GrabarConciliacion(event){
+  event.preventDefault();
+
+  // Validar campos vacíos
+  var camposVacios2 = false;
+  $("#FRConciliacion input[type='text']").each(function() {
+    if ($(this).val() === '') {
+      camposVacios2 = true;
+      return false; // Salir del bucle si se encuentra un campo vacío
+    }
+  });
+  
+  if (camposVacios2) {
+    mostrarToast("Por favor, complete todos los campos.");
+    return; // Detener la ejecución si hay campos vacíos
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "c_GrabarConciliacion.php",
+    data: $("#FRConciliacion").serialize(),
+    dataType: 'json', // Esperamos recibir datos en formato JSON
+    success: function(response) {
+        if (response.success) {
+            // El servidor devuelve éxito al guardar el cheque
+            mostrarToast("La conciliacion se guardó correctamente.");
+        } else {
+            console.log("Respuesta inesperada del servidor:", response);
+        }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+        mostrarToast("Error al conectar con el servidor. Intente de nuevo más tarde.");
+    }
+});
+$("#Dia-Anterior_oculto").val('');
+$("#Mes-Anterior_oculto").val('');
+$("#Año-Anterior_oculto").val('');
+$("#Dia-Actual_oculto").val('');
+$("#Mes-Actual_oculto").val('');
+$("#Año-Actual_oculto").val('');
+$("#libro_1").val('');
+$("#Depósito").val('');
+$("#Cheques-Anulados").val('');
+$("#Notas-de-Crédito").val('');
+$("#Ajustes").val('');
+$("#Subtotal").val('');
+$("#SUB_TOTAL").val('');
+$("#Cheques-girados").val('');
+$("#Notas-Débitos").val('');
+$("#Ajustes2").val('');
+$("#Subtotal2").val('');
+$("#SALDO_CONCILIADO").val('');
+$("#SALDO_BANCO").val('');
+$("#Depósitos-Tránsito").val('');
+$("#Cheques_en_Circulación").val('');
+$("#Ajustes3").val('');
+$("#Subtotal3").val('');
+$("#SaldoT").val('');
+$("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL ");
+$("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL ");
+$("#LibroActual1").text("SALDO EN BANCO AL ");
+$("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL ");
 }

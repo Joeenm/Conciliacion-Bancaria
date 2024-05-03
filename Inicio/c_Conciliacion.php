@@ -138,7 +138,7 @@ function MostrarConciliacion(){
                 //obtener los datos de cheques en circulacion
                 $sql5 = "SELECT SUM(monto) AS total_Circulacion
                 FROM cheques 
-                WHERE MONTH(fecha) = '$Mes' AND YEAR(fecha) ='$C_agno' AND fecha_reintegro = '0000-00-00' AND fecha_Anulado = '0000-00-00' AND fecha_circulacion = '0000-00-00'";
+                WHERE MONTH(fecha) = '$Mes' AND YEAR(fecha) ='$C_agno' AND fecha_reintegro = '0000-00-00' AND fecha_Anulado = '0000-00-00' AND fecha_circulacion != '0000-00-00'";
                 $resultado4 = $conn->query($sql5);
                 if ($resultado4) {
                     $Circulacion = $resultado4->fetch_assoc();

@@ -9,7 +9,7 @@ if (isset($_POST['numero_cheque'], $_POST['objeto-1']) && !empty($_POST['numero_
 
     // Realizar la actualización en la base de datos si objeto-1 no está vacío
     global $conn;
-    $sql = mysqli_query($conn, "UPDATE cheques SET fecha_reintegro='$Fecha_Circulacion' WHERE numero_cheque='$numeroCK'");
+    $sql = mysqli_query($conn, "UPDATE cheques SET fecha_circulacion='$Fecha_Circulacion' WHERE numero_cheque='$numeroCK'");
     
     if ($sql) {
         // Si la actualización se realizó correctamente, enviar mensaje de éxito

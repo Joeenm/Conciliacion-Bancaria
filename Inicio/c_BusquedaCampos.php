@@ -18,7 +18,7 @@ function mostrarAnulación(){
 
         if ($cheque_exists) {
             // Si el número de cheque existe, continuar con la consulta y procesamiento
-            $sql = "SELECT * FROM cheques WHERE numero_cheque = '$numero_cheque' AND fecha_anulado = '0000-00-00' AND fecha_reintegro = '0000-00-00'";
+            $sql = "SELECT * FROM cheques WHERE numero_cheque = '$numero_cheque' AND fecha_anulado = '0000-00-00' AND fecha_circulacion = '0000-00-00'";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {

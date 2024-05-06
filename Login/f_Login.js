@@ -1,20 +1,20 @@
-function Entrar(event){
+function Entrar(event) {
     // Validar campos vacíos
     event.preventDefault();
     var camposVacios = false;
     $("#FRLogin input[type='text'], #FRLogin input[type='password']").each(function() {
-      if ($(this).val() === '') {
-        camposVacios = true;
-        return false; // Salir del bucle si se encuentra un campo vacío
-      }
+        if ($(this).val() === '') {
+            camposVacios = true;
+            return false; // Salir del bucle si se encuentra un campo vacío
+        }
     });
 
     if (camposVacios) {
-      mostrarToast("Por favor, complete todos los campos.");
-      return; // Detener la ejecución si hay campos vacíos
+        mostrarToast("Por favor, complete todos los campos.");
+        return; // Detener la ejecución si hay campos vacíos
     }
     var usuario = $("#userName").val();
-    var contra =$("#Clave").val();
+    var contra = $("#Clave").val();
     console.log("Usuario(desde ajax): " + usuario)
     console.log("contra(desde ajax): " + contra)
     $.ajax({
@@ -31,7 +31,7 @@ function Entrar(event){
                     mostrarToast(data.error);
                 } else {
                     // Si la respuesta es exitosa, redirige al usuario a la página de inicio
-                    window.location.href = "/Proyecto-I/Inicio/index.php";
+                    window.location.href = "../Inicio/index.php";
                 }
             } catch(error) {
                 console.error("Error al analizar la respuesta JSON:", error);
@@ -48,15 +48,23 @@ function Entrar(event){
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  const inputFields = document.querySelectorAll("#userName, #Clave");
+    const inputFields = document.querySelectorAll("#userName, #Clave");
 
-  inputFields.forEach(function(inputField) {
-      inputField.addEventListener("input", function() {
-          if (this.value.length > 9) {
-              this.value = this.value.slice(0, 9); // Limita la longitud a 9 caracteres
-          }
-      });
-  });
+    inputFields.forEach(function(inputField) {
+        inputField.addEventListener("input", function() {
+            if (this.value.length > 9) {
+                this.value = this.value.slice(0, 9); // Limita la longitud a 9 caracteres
+            }
+        });
+    });
+
+    var inputClave = document.getElementById('Clave');
+    inputClave.addEventListener('keydown', function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            Entrar(event);
+        }
+    });
 });
 
 function mostrarToast(mensaje) {
@@ -66,10 +74,10 @@ function mostrarToast(mensaje) {
     
     toastMessage.textContent = mensaje;
     toastIcon.innerHTML = 'ℹ️'; // Icono de información
-  
+
     toast.classList.add('show'); // Mostrar la notificación
-  
+
     setTimeout(function() {
-      toast.classList.remove('show'); // Quitar la clase después de 3 segundos
+        toast.classList.remove('show'); // Quitar la clase después de 3 segundos
     }, 3000); // 3000 milisegundos = 3 segundos
-  }
+}

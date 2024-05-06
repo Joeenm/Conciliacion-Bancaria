@@ -288,8 +288,12 @@ function Anular(event) {
           $("#FRAnulacion")[0].reset();
         } else if ('error' in data) {
           mostrarToast(data.error); // Mostrar mensaje de error
+        } else if ('info' in data) { // Nuevo mensaje para información de registro
+          console.log(data.info); // Mostrar información de registro en la consola
+          mostrarToast("Ocurrió un error al anular el cheque. Consulta la consola para más detalles.");
         } else {
           console.error("Respuesta inesperada del servidor:", data);
+          mostrarToast("Error inesperado en la respuesta del servidor");
         }
       } catch (error) {
         console.error("Error al analizar la respuesta JSON:", error);
@@ -325,6 +329,7 @@ function Circulacion(event) {
                     mostrarToast(data.error); // Mostrar mensaje de error
                 } else {
                     console.error("Respuesta inesperada del servidor:", data);
+                    mostrarToast("Respuesta inesperada del servidor");
                 }
             } catch (error) {
                 console.error("Error al analizar la respuesta JSON:", error);

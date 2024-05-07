@@ -147,7 +147,9 @@ function MostrarConciliacion(){
                 }//aqui acaba el if de cheques en circulacion
                 
                 //operaciones de Sumas
-
+                $total_Anulados = number_format($total_Anulados, 2, '.', '');
+                $total_Circulacion = number_format($total_Circulacion, 2, '.', '');
+                $total_Girados =  number_format($total_Girados, 2, '.', '');
                 $sub1 = ($masdepositos +$total_Anulados + $masnotascredito + $masajusteslibro);
                 $subtotal1 = $Saldo_Anterior + $sub1;
                 $sub2 = ($total_Girados + $menosnotasdebito + $menosajusteslibro);

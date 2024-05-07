@@ -24,7 +24,7 @@ function MostrarConciliacion(){
           echo json_encode(array('error' => 'No se entró en el if del mes'));
         }  
 
-    if($C_agno <= 2022 && $Mes <=11 ){  
+    if($C_agno <= 2022 && $Mes <=12 ){  
         echo json_encode(array('error' =>'Fuera de año fiscal'));   
     } else {
         $sql = "SELECT * FROM conciliacion WHERE mes = '$Mes' and agno ='$C_agno' ";
@@ -109,7 +109,7 @@ function MostrarConciliacion(){
                 if ($resultado2) {
                     $Anulados = $resultado2->fetch_assoc();
                     $total_Anulados = $Anulados['total_Anulado'];
-                    if($total_Anulados == null || $total_Anulados == '') {
+                    if($total_Anulados == null) {
                         $total_Anulados = 0; 
                     }
                 } else {

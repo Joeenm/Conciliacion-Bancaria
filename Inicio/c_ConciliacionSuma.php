@@ -10,11 +10,9 @@ function TotalConciliacion(){
     if (isset($_POST['SALDO_BANCO'])) {
         global $conn;
         $SALDO_BANCO = floatval($_POST['SALDO_BANCO']);
-        $Subtotal3 = floatval($_POST['Subtotal3']);
-        
-        $Total= ($SALDO_BANCO - $Subtotal3);
-        $Total = number_format($Total, 2, '.', '');
-        
+        $sub3V = floatval($_POST['sub3V']);
+        $Total= ($SALDO_BANCO + $sub3V);
+        $Total = number_format($Total, 2, '.', '');        
         $response = array(
         'Total'=> $Total,
         );

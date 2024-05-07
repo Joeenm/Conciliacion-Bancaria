@@ -15,4 +15,4 @@ if ($conecction->connect_error) {
 //echo json_encode('Conexion exitosa');
 }
 //Cerrar conexión (opcional, se cerrará automáticamente al final del script)
-//$conn->close();
+//$conecction->close();

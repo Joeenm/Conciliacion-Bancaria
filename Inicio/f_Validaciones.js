@@ -439,6 +439,7 @@ function MostrarConciliacion(){
                 $("#Cheques_en_Circulación").val('');
                 $("#Ajustes3").val('');
                 $("#Subtotal3").val('');
+                $("#sub3V").val('');
                 $("#SaldoT").val('');
                 $("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL ");
                 $("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL ");
@@ -472,6 +473,7 @@ function MostrarConciliacion(){
                 $("#Cheques_en_Circulación").val(data["La respuesta es"].menoschequescirculacion);
                 $("#Ajustes3").val(data["La respuesta es"].masajustesbanco);
                 $("#Subtotal3").val(data["La respuesta es"].sub3);
+                $("#sub3V").val(data["La respuesta es"].sub3V);
                 //$("#SALDO_BANCO").val(data.saldobanco);
                 //$("#SALDO-CONCILIADO-IGUAL-A").val(data.saldo_conciliado);
                 $("#SALDO_BANCO").prop("disabled", false);
@@ -490,18 +492,22 @@ function SumaConciliacion(event) {
     clearTimeout(typingTimer); // Reiniciar el temporizador en cada pulsación de tecla
     typingTimer = setTimeout(function() {
         var SaldoBanco = $("#SALDO_BANCO").val();
-        var Saldo3 = $('#Subtotal3').val();
+        var Saldo3 = $('#sub3V').val();
 
         $.ajax({
             url: "c_ConciliacionSuma.php",
             type: "POST",
-            data: { SALDO_BANCO: SaldoBanco, Subtotal3: Saldo3 },
+            data: { SALDO_BANCO: SaldoBanco, sub3V: Saldo3 },
             success: function(data) {
                 try {
                     data = JSON.parse(data);
                     console.log("Datos recibidos del servidor: ", data);
                     var total = parseFloat(data['La suma en total es']['Total']);
-                    $('#SaldoT').val(total);
+                    var formattedTotal = total.toFixed(2);
+                    if (total < 0) {
+                        formattedTotal = '(' + total + ')';
+                    }
+                    $('#SaldoT').val(formattedTotal);
                 } catch (error) {
                     console.error("Error al analizar la respuesta JSON:", error);
                 }
@@ -527,51 +533,56 @@ function GrabarConciliacion(event){
     mostrarToast("Por favor, complete todos los campos.");
     return; // Detener la ejecución si hay campos vacíos
   }
-
-  $.ajax({
-    type: "POST",
-    url: "c_GrabarConciliacion.php",
-    data: $("#FRConciliacion").serialize(),
-    dataType: 'json', // Esperamos recibir datos en formato JSON
-    success: function(response) {
-        if (response.success) {
-            // El servidor devuelve éxito al guardar el cheque
-            mostrarToast("La conciliacion se guardó correctamente.");
-        } else {
-            console.log("Respuesta inesperada del servidor:", response);
-        }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-        console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
-        mostrarToast("Error al conectar con el servidor. Intente de nuevo más tarde.");
-    }
-});
-$("#Dia-Anterior_oculto").val('');
-$("#Mes-Anterior_oculto").val('');
-$("#Año-Anterior_oculto").val('');
-$("#Dia-Actual_oculto").val('');
-$("#Mes-Actual_oculto").val('');
-$("#Año-Actual_oculto").val('');
-$("#libro_1").val('');
-$("#Depósito").val('');
-$("#Cheques-Anulados").val('');
-$("#Notas-de-Crédito").val('');
-$("#Ajustes").val('');
-$("#Subtotal").val('');
-$("#SUB_TOTAL").val('');
-$("#Cheques-girados").val('');
-$("#Notas-Débitos").val('');
-$("#Ajustes2").val('');
-$("#Subtotal2").val('');
-$("#SALDO_CONCILIADO").val('');
-$("#SALDO_BANCO").val('');
-$("#Depósitos-Tránsito").val('');
-$("#Cheques_en_Circulación").val('');
-$("#Ajustes3").val('');
-$("#Subtotal3").val('');
-$("#SaldoT").val('');
-$("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL ");
-$("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL ");
-$("#LibroActual1").text("SALDO EN BANCO AL ");
-$("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL ");
+  var Comparacion1= $("#SALDO_CONCILIADO").val();
+  var Comparacion2 = $("#SaldoT").val();
+  if(Comparacion1==Comparacion2){
+    $.ajax({
+      type: "POST",
+      url: "c_GrabarConciliacion.php",
+      data: $("#FRConciliacion").serialize(),
+      dataType: 'json', // Esperamos recibir datos en formato JSON
+      success: function(response) {
+          if (response.success) {
+              // El servidor devuelve éxito al guardar el cheque
+              mostrarToast("La conciliacion se guardó correctamente.");
+          } else {
+              console.log("Respuesta inesperada del servidor:", response);
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+          mostrarToast("Error al conectar con el servidor. Intente de nuevo más tarde.");
+      }
+  });
+    $("#Dia-Anterior_oculto").val('');
+    $("#Mes-Anterior_oculto").val('');
+    $("#Año-Anterior_oculto").val('');
+    $("#Dia-Actual_oculto").val('');
+    $("#Mes-Actual_oculto").val('');
+    $("#Año-Actual_oculto").val('');
+    $("#libro_1").val('');
+    $("#Depósito").val('');
+    $("#Cheques-Anulados").val('');
+    $("#Notas-de-Crédito").val('');
+    $("#Ajustes").val('');
+    $("#Subtotal").val('');
+    $("#SUB_TOTAL").val('');
+    $("#Cheques-girados").val('');
+    $("#Notas-Débitos").val('');
+    $("#Ajustes2").val('');
+    $("#Subtotal2").val('');
+    $("#SALDO_CONCILIADO").val('');
+    $("#SALDO_BANCO").val('');
+    $("#Depósitos-Tránsito").val('');
+    $("#Cheques_en_Circulación").val('');
+    $("#Ajustes3").val('');
+    $("#Subtotal3").val('');
+    $("#SaldoT").val('');
+    $("#Libro_Pasado").text("SALDO SEGÚN LIBRO AL ");
+    $("#LibroActual").text("SALDO CONCILIADO SEGÚN LIBRO AL ");
+    $("#LibroActual1").text("SALDO EN BANCO AL ");
+    $("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL ");
+  }else{
+    mostrarToast("Verifique los datos, la conciliacion no se puede guardar por incoherencia de datos.");
+  }
 }

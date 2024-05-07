@@ -179,6 +179,7 @@ $age_Actual=Date('Y');
         <div id="subtotal"><h2>Subtotal</h2></div>
         <div>
             <input id="Subtotal3" name="Subtotal3" type="text" readonly></div>
+            <input type="hidden" id="sub3V" name="sub3V" >
         <div id="saldo-banco-final"><h2 id ="LibroActual2" name="LibroActual2">SALDO CONCILIADO IGUAL A BANCO AL </h2></div>
         <div></div>
         <div>

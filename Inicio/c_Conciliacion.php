@@ -89,10 +89,6 @@ function MostrarConciliacion(){
                         // Asignar los totales al array correspondiente
                         $totales_por_transaccion[$transaccion] = $total_monto;                      
                     }
-                    /*
-                    foreach ($transacciones as $transaccion) {
-                        echo json_encode(array('Transaccion ' . $transaccion => $totales_por_transaccion[$transaccion]));
-                    }*/
                     $masdepositos = $totales_por_transaccion[1];
                     $masnotascredito = $totales_por_transaccion[2];
                     $masajusteslibro = $totales_por_transaccion[3];
@@ -163,6 +159,11 @@ function MostrarConciliacion(){
                 $sub2 = number_format($sub2, 2, '.', '');
                 $saldolibros = number_format($saldolibros, 2, '.', '');
                 $sub3 = number_format($sub3, 2, '.', '');
+                $Sub3Val = $sub3; 
+                if($sub3<0){
+                    $sub3 = "(" . $sub3 . ")";
+                }
+
                 $response = array(
                     'DayA' => $dayA,
                     'MesA'=> $MesA,
@@ -189,6 +190,7 @@ function MostrarConciliacion(){
                     'menoschequescirculacion' => $total_Circulacion,//si
                     'masajustesbanco' => $masajustesbanco,//si
                     'sub3' => $sub3,//si
+                    'sub3V' => $Sub3Val,
                     //'saldo_conciliado' => $saldo_conciliado// no va
                 );
                 echo json_encode(array('La respuesta es' => $response ));

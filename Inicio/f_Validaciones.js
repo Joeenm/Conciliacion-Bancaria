@@ -586,3 +586,25 @@ function GrabarConciliacion(event){
     mostrarToast("Verifique los datos, la conciliacion no se puede guardar por incoherencia de datos.");
   }
 }
+
+function Reportes(event) {
+  event.preventDefault();
+  var file = $("#archivo")[0].files[0]; // Obtiene el archivo seleccionado
+  var formData = new FormData(); // Crea un objeto FormData para enviar el archivo
+  formData.append('archivo', file); // Agrega el archivo al objeto FormData
+
+  $.ajax({
+      type: "POST",
+      url: "c_Reportes.php",
+      data: formData, // Envía el objeto FormData que contiene el archivo
+      contentType: false, // Importante: No establezcas el tipo de contenido
+      processData: false, // Importante: No proceses los datos
+      success: function(data) {
+          try {
+              console.log("Datos recibidos del servidor:", data);
+          } catch (error) {
+              console.error("Error al analizar la respuesta JSON:", error);
+          }
+      },
+  }); 
+}

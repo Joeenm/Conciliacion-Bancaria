@@ -55,3 +55,12 @@ function cargarInicio() {
   function cargarMantenimiento() {
     document.getElementById('contenido').innerHTML = 'Contenido de Mantenimiento';
   }
+
+  function cargarAsistencia(){
+    fetch('p_Asistencia.php')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('contenido').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar la página:', error));
+} 

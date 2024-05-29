@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.maintenance-container {
+    background-color: #ffcc00;
+    border: 5px solid #ff6600;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    margin: auto; /* Centra horizontalmente */
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.maintenance-message h1 {
+    font-size: 3em;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.maintenance-message p {
+    font-size: 1.5em;
+    color: #666;
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .maintenance-message h1 {
+        font-size: 2em;
+    }
+
+    .maintenance-message p {
+        font-size: 1.2em;
+    }
+
+    .maintenance-container {
+        padding: 15px;
+    }
+}

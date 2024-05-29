@@ -1,6 +1,6 @@
 <?php
 // Incluir TCPDF usando la ruta absoluta
-require_once('C:/Users/arcia/OneDrive/Escritorio/Ejemplos/Proyecto-I/TCPDF/tcpdf.php');
+require_once('../TCPDF/tcpdf.php');
 require "db-conciliacion.php"; 
 // Conexión a la base de datos
 // Código predefinido

@@ -1,39 +1,144 @@
-#Cuerpo {
-    max-width: 95%;
-    width: 100%;
-    background-color: hsl(0, 0%, 10%);
-    padding: 2vw 2vh;
-    border-radius: 16px;
-    margin: 2vw auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+#contenido {
+  max-width: 95%;
+  width: 100%;
+  background-color: hsl(0, 0%, 10%);
+  border-radius: 16px;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  #Global{
-    background-color: #fff;
-    padding: 8px;
-    border-radius: 5px;
-    text-align: left;
-    flex-grow: 1;
-    margin-right: 10px;
-  }
+#procesarDatos {
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: left;
+  flex-grow: 1;
+  margin-right: 10px;
+}
 
-#Global label{
+#procesarDatosTitulo {
+  padding-bottom: 10px;
+}
+
+#procesarDatos h2 {
   color: #333;
   font-size: 25px;
   margin: 0;
 }
 
-#Global button {
-  padding: 5px 20px;
-  line-height: 18px;
-  margin: 0 10px;
-  border: none;
+.contenedor-subirArchivo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  margin-top: 20px;
+  gap: 200px; /* Espacio entre los elementos */
+}
+
+#subirArchivo input[type="file"],
+#desde input[type="date"],
+#hasta input[type="date"] {
+  width: 130%;
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
   border-radius: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#nombre select {
+  width: 250px;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+#contenedorReportes {
+  display: flex;
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  color: #cab600;
+  justify-content: center; /* Alinea los elementos al inicio */
+  gap: 100px; /* Espacio entre los elementos */
+}
+
+.contenedor-boton {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.botones {
+  padding: 10px 20px;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
   background-color: #0aa5ff;
   color: #fff;
-  font-size: 15px;
+  font-size: 22px;
   cursor: pointer;
 }
 
+.botones:hover {
+  background-color: #007acc;
+}
+
+.div-con-linea {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 25px;
+  padding-bottom: 30px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .contenedor-subirArchivo {
+      gap: 100px;
+  }
+
+  #contenedorReportes {
+      gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contenedor-subirArchivo {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+
+  #subirArchivo input[type="file"],
+  #desde input[type="date"],
+  #hasta input[type="date"] {
+      width: 100%;
+  }
+
+  #contenedorReportes {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+
+  #nombre select {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #procesarDatos h2 {
+      font-size: 20px;
+  }
+
+  .botones {
+      font-size: 18px;
+  }
+}
+
+.botones-margen-top {
+  margin-top: 60px; /* Ajusta este valor según sea necesario */
+}

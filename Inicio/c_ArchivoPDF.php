@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require "db-conciliacion.php";
-require_once('C:/Users/arcia/OneDrive/Escritorio/Ejemplos/Proyecto-I/TCPDF/tcpdf.php');
+require_once('../TCPDF/tcpdf.php');
 header('Content-Type: application/json');
 $response = array();
 $Name = trim($_POST['Nombre']);

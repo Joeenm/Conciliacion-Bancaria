@@ -8,20 +8,23 @@ require_once('../TCPDF/tcpdf.php');
 header('Content-Type: application/json');
 $response = array();
 $Name = trim($_POST['Nombre']);
-/*$nameParts = explode(' ', $Name);
-$Name1 = $nameParts[0]; // Nombre
-$Name2 = $nameParts[1]; // Apellido */
-$F1 = trim($_POST['Fecha1']);
-$F1 = trim($_POST['Fecha2']);
+list($nombre, $apellido) = explode(' ', $Name, 2);
 
-$sql = "SELECT * FROM rrhh WHERE nombre1 = '$Name'";
+$F1 = trim($_POST['Fecha1']);
+$F2 = trim($_POST['Fecha2']);
+
+$sql = "SELECT * FROM rrhh WHERE nombre1 = '$nombre' AND apellido1 = '$apellido'";
 $resultm = $conn->query($sql);
 if ($resultm->num_rows > 0) {
     $rows = $resultm->fetch_assoc();
     $Cod = $rows['codigo_marcacion'];
     $sql = "SELECT entrada.fecha, DATE_FORMAT(entrada.fecha, '%W') AS dia, entrada.hora AS hora_entrada, salida.hora AS hora_salida
-            FROM datos entrada INNER JOIN datos salida ON entrada.codigo = salida.codigo AND entrada.fecha = salida.fecha
-            WHERE entrada.hora < salida.hora AND entrada.codigo = '$Cod' ORDER BY entrada.fecha ASC, entrada.hora ASC;";
+    FROM datos entrada 
+    INNER JOIN datos salida ON entrada.codigo = salida.codigo AND entrada.fecha = salida.fecha
+    WHERE entrada.hora < salida.hora 
+    AND entrada.codigo = '$Cod' 
+    AND entrada.fecha BETWEEN '$F1' AND '$F2' 
+    ORDER BY entrada.fecha ASC, entrada.hora ASC;";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -89,7 +92,7 @@ if ($resultm->num_rows > 0) {
     $pdf->AddPage();
 
     // Título del PDF
-    $pdf->Write(0, 'Reporte de Marcaciones', '', 0, 'C', true, 0, false, false, 0);
+    $pdf->Write(0, 'Reporte de Marcaciones de '.$Name, '', 0, 'C', true, 0, false, false, 0);
 
     // Crear tabla HTML
     $html = '<table border="1" cellpadding="4">

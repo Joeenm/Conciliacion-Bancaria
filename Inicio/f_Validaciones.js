@@ -615,64 +615,43 @@ function PedirReporte(event) {
   var F2 = $("#Fecha2").val();
   var N= 1;
   var y= 2;
-  // Función para convertir fechas en formato MM/DD/YYYY a componentes individuales
-  function parseDateComponents(input) {
-      var parts = input.split('/');
-      return {
-          year: parseInt(parts[2], 10),
-          month: parseInt(parts[0], 10),
-          day: parseInt(parts[1], 10)
-      };
-  }
-
-  var date1 = parseDateComponents(F1);
-  var date2 = parseDateComponents(F2);
-
-  // Función para comparar las fechas
-  function isDate1AfterDate2(date1, date2) {
-      if (date1.year !== date2.year) {
-          return date1.year > date2.year;
-      }
-      if (date1.month !== date2.month) {
-          return date1.month > date2.month;
-      }
-      return date1.day > date2.day;
-  }
-
-  /* Verificar que las fechas sean válidas (no NaN)
-  if (isNaN(date1.year) || isNaN(date1.month) || isNaN(date1.day) ||
-      isNaN(date2.year) || isNaN(date2.month) || isNaN(date2.day)) {
-      alert("Por favor ingrese fechas válidas.");
+  console.log(F1,F2);
+  // Verificar que las fechas sean válidas (no NaN)
+  if (!F1 || !F2) {
+      mostrarToast("Por favor ingrese fechas válidas.");
       return;
   }
-*/
-  // Comparar las fechas isDate1AfterDate2(date1, date2)
-if (N < y) {
-  $.ajax({
-    type: "POST",
-    url: "c_ArchivoPDF.php",
-    data: $("#FR_Reportes").serialize(),
-    dataType: 'text', // Cambiado a 'text' temporalmente
-    success: function (response) {
-        console.log("Respuesta del servidor:", response);
-        try {
-            var jsonResponse = JSON.parse(response);
-            if (jsonResponse.success) {
-                window.open(jsonResponse.pdf_url, '_blank');
-            } else {
-                alert(jsonResponse.error);
-            }
-        } catch (e) {
-            console.error("Error al analizar JSON:", e, response);
-            alert("Error inesperado en la respuesta del servidor.");
-        }
-    },
-    error: function (xhr, status, error) {
-        console.error('Error en la solicitud AJAX:', status, error);
-        alert('Ocurrió un error al generar el reporte. Intente de nuevo.');
-    }
-});
-} else {
-alert("La fecha inicial debe ser mayor que la fecha final.");
-}
+  var dateF1 = new Date(F1);
+  var dateF2 = new Date(F2);
+
+  // Verificar que F1 sea menor que F2
+  if (dateF1 >= dateF2) {
+    mostrarToast("La fecha de inicio debe ser anterior a la fecha de fin.");
+    return;
+  }else{
+    $.ajax({
+      type: "POST",
+      url: "c_ArchivoPDF.php",
+      data: $("#FR_Reportes").serialize(),
+      dataType: 'text', // Cambiado a 'text' temporalmente
+      success: function (response) {
+          console.log("Respuesta del servidor:", response);
+          try {
+              var jsonResponse = JSON.parse(response);
+              if (jsonResponse.success) {
+                  window.open(jsonResponse.pdf_url, '_blank');
+              } else {
+                  alert(jsonResponse.error);
+              }
+          } catch (e) {
+              console.error("Error al analizar JSON:", e, response);
+              alert("Error inesperado en la respuesta del servidor.");
+          }
+      },
+      error: function (xhr, status, error) {
+          console.error('Error en la solicitud AJAX:', status, error);
+          alert('Ocurrió un error al generar el reporte. Intente de nuevo.');
+      }
+  });
+  }
 }

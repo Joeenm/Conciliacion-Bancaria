@@ -58,7 +58,8 @@
                             $Buscar_Nombre = mysqli_query($conn, "SELECT * FROM rrhh ORDER BY nombre1 ASC");
                             // Iterar a través de los resultados y generar las opciones HTML
                             while ($Nombre = mysqli_fetch_assoc($Buscar_Nombre)) {
-                                echo "<option value='" . $Nombre['nombre1'] . "'>" . $Nombre['nombre1'] . " " . $Nombre['apellido1'] . "</option>";
+                                $nombreCompleto = $Nombre['nombre1'] . " " . $Nombre['apellido1'];
+                                echo "<option value='" . $nombreCompleto . "'>" . $nombreCompleto . "</option>";
                             }
                             ?>
                         </select>

@@ -34,6 +34,7 @@
           <a href="#" onclick="cargarConciliacion()">Conciliación</a>
           <a href="#" onclick="cargarReportes()">Reportes</a>
           <a href="#" onclick="cargarMantenimiento()">Mantenimiento</a>
+          <a href="#" onclick="cargarAsistencia()">Asistencia</a>
         </div>
         <div id="reloj"></div>
       </div>

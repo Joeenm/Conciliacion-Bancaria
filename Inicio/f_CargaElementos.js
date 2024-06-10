@@ -49,9 +49,28 @@ function cargarInicio() {
   } 
 
   function cargarReportes() {
-    document.getElementById('contenido').innerHTML = 'Contenido de Reportes';
-  }
+    fetch('p_enMantenimiento.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('contenido').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar la página:', error));
+  } 
 
   function cargarMantenimiento() {
-    document.getElementById('contenido').innerHTML = 'Contenido de Mantenimiento';
+    fetch('p_enMantenimiento.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('contenido').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar la página:', error));
   }
+
+  function cargarAsistencia(){
+    fetch('p_Asistencia.php')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('contenido').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar la página:', error));
+} 

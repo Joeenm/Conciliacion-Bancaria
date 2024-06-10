@@ -399,6 +399,7 @@ function mostrarToast(mensaje) {
 }
 
 
+
 function MostrarConciliacion(){
   var NumeroMes = $("#Selectmes").val();
   var NumeroAge = $("#age").val();
@@ -584,5 +585,99 @@ function GrabarConciliacion(event){
     $("#LibroActual2").text("SALDO CONCILIADO IGUAL A BANCO AL ");
   }else{
     mostrarToast("Verifique los datos, la conciliacion no se puede guardar por incoherencia de datos.");
+  }
+}
+
+// Función para Grabar archivos
+function Reportes(event) {
+  event.preventDefault();
+  var file = $("#archivo")[0].files[0]; 
+  if(!file){
+    mostrarToast("No se seleccionó ningun acrchivo");
+    return;
+  }// Obtiene el archivo seleccionado
+  var formData = new FormData(); // Crea un objeto FormData para enviar el archivo
+  formData.append('archivo', file); // Agrega el archivo al objeto FormData
+  mostrarToast("Guardando Datos..."); // Mostrar notificación de guardado
+  document.getElementById("hiddenInput").style.display = "block";// mostrar los elementos ocultos
+  document.getElementById("loadingSpinner").style.display = "block";// mostrar los elementos ocultos
+  $.ajax({
+    type: "POST",
+    url: "c_Asistencia.php",
+    data: formData, // Envía el objeto FormData que contiene el archivo
+    contentType: false, // Importante: No establezcas el tipo de contenido
+    processData: false, // Importante: No proceses los datos
+    success: function(data) {
+      try {
+        var jsonResponse = JSON.parse(data);
+        if (jsonResponse.success) {
+          document.getElementById("hiddenInput").style.display = "none";// dejar de mostrar los elementos ocultos
+          document.getElementById("loadingSpinner").style.display = "none";// dejar de mostrar los elementos ocultos
+          mostrarToast(jsonResponse.success); // Mostrar notificación de éxito del servidor
+          $("#archivo").val('');
+        } else {
+          document.getElementById("hiddenInput").style.display = "none"; // dejar de mostrar los elementos ocultos
+          document.getElementById("loadingSpinner").style.display = "none";// dejar de mostrar los elementos ocultos
+          mostrarToast(jsonResponse.error); // Mostrar notificación de error del servidor
+        }
+      } catch (error) {
+        document.getElementById("hiddenInput").style.display = "none"; // dejar de mostrar los elementos ocultos
+        document.getElementById("loadingSpinner").style.display = "none";// dejar de mostrar los elementos ocultos
+        console.error("Error al analizar la respuesta JSON:", error);
+        mostrarToast("El Archivo no pudo ser grabado, Revise la compatibilidad de contenido"); // Mostrar notificación de error genérica
+      }
+    },
+  });
+}
+
+function PedirReporte(event) {
+  event.preventDefault();
+  var F1 = $("#Fecha1").val();
+  var F2 = $("#Fecha2").val();
+  console.log(F1,F2);
+  // Verificar que las fechas sean válidas (no NaN)
+  if (!F1 || !F2) {// Verificar que se ingresaron fechas validad
+      mostrarToast("Por favor ingrese fechas válidas.");
+      return;
+  }
+  var dateF1 = new Date(F1);
+  var dateF2 = new Date(F2);
+
+  // Verificar que F1 sea menor que F2
+  if (dateF1 > dateF2  ) {// Validar En caso de usar rangos de fechas
+    mostrarToast("La primera fecha debe ser menor a la ultima. ");
+    return;
+  }else{
+    document.getElementById("loadingSpinner2").style.display = "block";//mostrar los elementos ocultos
+    $.ajax({
+      type: "POST",
+      url: "c_ArchivoPDF.php",
+      data: $("#FR_Reportes").serialize(),
+      dataType: 'text', // Cambiado a 'text' temporalmente
+      success: function (response) {
+          console.log("Respuesta del servidor:", response);
+          try {
+              var jsonResponse = JSON.parse(response);
+              if (jsonResponse.success) {
+                  document.getElementById("loadingSpinner2").style.display = "none";// dejar de mostrar los elementos ocultos
+                  window.open(jsonResponse.pdf_url, '_blank');
+                  $("#Fecha1").val('');
+                  $("#Fecha2").val(''); 
+              } else {
+                document.getElementById("loadingSpinner2").style.display = "none";// dejar de mostrar los elementos ocultos
+                mostrarToast(jsonResponse.error);
+              }
+          } catch (e) {
+              document.getElementById("loadingSpinner2").style.display = "none";// dejar de mostrar los elementos ocultos
+              console.error("Error al analizar JSON:", e, response);
+              mostrarToast("Error inesperado en la respuesta del servidor.");
+          }
+      },
+      error: function (xhr, status, error) {
+          console.error('Error en la solicitud AJAX:', status, error);
+          document.getElementById("loadingSpinner2").style.display = "none";// dejar de mostrar los elementos ocultos
+          mostrarToast('Ocurrió un error al generar el reporte. Intente de nuevo.');
+      }
+  });
   }
 }

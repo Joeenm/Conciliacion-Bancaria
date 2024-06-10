@@ -4,6 +4,13 @@ require "db-conciliacion.php";
 $Ruta = $_FILES['archivo']['tmp_name'];
 $Archivo = fopen($Ruta, 'r');
 
+$allowedExtensions = array('dat'); // Extensiones permitidas
+$extension = pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
+if (!in_array($extension, $allowedExtensions)) {
+    echo json_encode(array('error' => 'Tipo de archivo no válido. Se permiten solo archivos .dat '));
+    exit;
+}
+
 if ($Archivo !== false) {
     // Iniciar una transacción
     mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
@@ -12,7 +19,7 @@ if ($Archivo !== false) {
     $stmt = $conn->prepare("INSERT INTO `datos` (`codigo`, `fecha`, `hora`, `filler1`, `filler2`, `filler3`, `filler4`) 
                             VALUES (?, ?, ?, ?, ?, ?, ?)");
     if ($stmt === false) {
-        echo json_encode(array('error' => $conn->error));
+        echo json_encode(array('error' => 'El archivo no pudo ser grabado'));
         exit;
     }
 
@@ -43,7 +50,7 @@ if ($Archivo !== false) {
         echo json_encode(array('success' => 'La inserción fue grabada con éxito.'));
     } else {
         mysqli_rollback($conn);
-        echo json_encode(array('error' => $stmt->error));
+        echo json_encode(array('error' => 'El archivo no pudo ser grabado'));
     }
 
     // Cerrar la declaración

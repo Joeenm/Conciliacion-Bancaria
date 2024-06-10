@@ -7,6 +7,7 @@
     <title>Asistencia</title>
     <link rel="stylesheet" href="stylesAsistencia.css">
     <link rel="stylesheet" href="stylesNotificacion.css">
+    <link rel="stylesheet" href="stylesCarga.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="f_Validaciones.js"></script>
 </head>
@@ -22,11 +23,15 @@
 
                 <div class="contenedor-subirArchivo">
                     <div id="subirArchivo">
-                        <input type="file" id="archivo" name="archivo" accept=".dat">
+                        <input type="file" id="archivo" name="archivo" accept=".dat, .txt">
                     </div>
 
                     <div class="contenedor-boton">
                         <button class="botones" type="submit" id="Grabar" name="Grabar" onclick="Reportes(event)">Procesar Datos</button>
+                        <div class="contenedor-boton2">
+                            <input type="text" id="hiddenInput" value="Guardando datos..." readonly>
+                        </div>
+                        <div class="spinner" id="loadingSpinner"></div>
                     </div>
                 </div>
 
@@ -67,8 +72,9 @@
 
                     <div class="contenedor-boton">
                         <button class="botones botones-margen-top" type="button" onclick="PedirReporte(event)" >Buscar</button>
+                        <div class="spinner2" id="loadingSpinner2"></div>
                     </div>
-
+                    
                 </div>
 
                 <div id="toast-notification" class="toast">

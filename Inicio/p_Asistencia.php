@@ -7,7 +7,6 @@
     <title>Asistencia</title>
     <link rel="stylesheet" href="stylesAsistencia.css">
     <link rel="stylesheet" href="stylesNotificacion.css">
-    <link rel="stylesheet" href="stylesCarga.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="f_Validaciones.js"></script>
 </head>

@@ -132,7 +132,7 @@ if ($resultm->num_rows > 0) {
         $pdf->SetKeywords('TCPDF, PDF, reporte, marcaciones');
 
         // Establecer cabecera y pie de página
-        $pdf->SetHeaderData('Logo.png', 100, 'QA Insurance - Reporte de Marcaciones de ' . $Name, '');
+        $pdf->SetHeaderData('Logo.png', 100, 'QA Insurance ® - Reporte de Marcaciones de ' . $Name, '');
         $pdf->setFooterData(array(0,64,0), array(0,64,128));
 
         // Establecer fuente para cabecera y pie de página
